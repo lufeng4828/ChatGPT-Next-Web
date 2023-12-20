@@ -11,6 +11,7 @@ const it: PartialLocaleType = {
     ChatItemCount: (count: number) => `${count} messaggi`,
   },
   Chat: {
+    Name: "Chat",
     SubTitle: (count: number) => `${count} messaggi con ChatGPT`,
     Actions: {
       ChatList: "Vai alla Chat List",
@@ -53,6 +54,8 @@ const it: PartialLocaleType = {
       "Ripristinare cancellerà la conversazione corrente e la cronologia di memoria. Sei sicuro che vuoi riavviare?",
   },
   Home: {
+    Title: "ChatGPT Next",
+    Slogn: "Build your own AI assistant.",
     NewChat: "Nuova Chat",
     DeleteChat: "Confermare la cancellazione della conversazione selezionata?",
     DeleteToast: "Chat Cancellata",

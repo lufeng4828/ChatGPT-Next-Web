@@ -19,6 +19,7 @@ const ar: PartialLocaleType = {
     ChatItemCount: (count: number) => `${count} رسائل`,
   },
   Chat: {
+    Name: "دردشة",
     SubTitle: (count: number) => ` ${count} رسائل مع ChatGPT`,
     Actions: {
       ChatList: "الانتقال إلى قائمة الدردشة",
@@ -93,6 +94,8 @@ const ar: PartialLocaleType = {
       "سيؤدي إعادة التعيين إلى مسح سجل المحادثة الحالي والذاكرة التاريخية. هل أنت متأكد أنك تريد الاستمرار؟",
   },
   Home: {
+    Title: "ChatGPT Next",
+    Slogn: "Build your own AI assistant.",
     NewChat: "دردشة جديدة",
     DeleteChat: "هل تريد تأكيد حذف المحادثة المحددة؟",
     DeleteToast: "تم حذف الدردشة",

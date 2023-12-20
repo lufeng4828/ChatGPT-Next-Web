@@ -22,9 +22,11 @@ const cn = {
     ChatItemCount: (count: number) => `${count} 条对话`,
   },
   Chat: {
+    Name: "聊天",
     SubTitle: (count: number) => `共 ${count} 条对话`,
     EditMessage: {
       Title: "编辑消息记录",
+      Placeholder: "请输入内容",
       Topic: {
         Title: "聊天主题",
         SubTitle: "更改当前聊天主题",
@@ -119,6 +121,8 @@ const cn = {
     ResetConfirm: "确认清空历史摘要？",
   },
   Home: {
+    Title: "ChatGPT Next",
+    Slogn: "Build your own AI assistant.",
     NewChat: "新的聊天",
     DeleteChat: "确认删除选中的对话？",
     DeleteToast: "已删除会话",
@@ -374,7 +378,7 @@ const cn = {
     Sysmessage: "你是一个助手",
   },
   Mask: {
-    Name: "面具",
+    Name: "发现",
     Page: {
       Title: "预设角色面具",
       SubTitle: (count: number) => `${count} 个预设角色定义`,
@@ -441,9 +445,9 @@ const cn = {
     Config: "配置",
   },
   Exporter: {
-    Description : {
-      Title: "只有清除上下文之后的消息会被展示"
-    },  
+    Description: {
+      Title: "只有清除上下文之后的消息会被展示",
+    },
     Model: "模型",
     Messages: "消息",
     Topic: "主题",

@@ -11,6 +11,7 @@ const de: PartialLocaleType = {
     ChatItemCount: (count: number) => `${count} Nachrichten`,
   },
   Chat: {
+    Name: "Chat",
     SubTitle: (count: number) => `${count} Nachrichten mit ChatGPT`,
     Actions: {
       ChatList: "Zur Chat-Liste gehen",
@@ -53,6 +54,8 @@ const de: PartialLocaleType = {
       "Das Zurücksetzen löscht den aktuellen Gesprächsverlauf und das Langzeit-Gedächtnis. Möchten Sie wirklich zurücksetzen?",
   },
   Home: {
+    Title: "ChatGPT Next",
+    Slogn: "Build your own AI assistant.",
     NewChat: "Neuer Chat",
     DeleteChat: "Bestätigen Sie, um das ausgewählte Gespräch zu löschen?",
     DeleteToast: "Chat gelöscht",

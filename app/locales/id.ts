@@ -19,6 +19,7 @@ const id: PartialLocaleType = {
     ChatItemCount: (count: number) => `${count} pesan`,
   },
   Chat: {
+    Name: "Chat",
     SubTitle: (count: number) => `${count} pesan`,
     Actions: {
       ChatList: "Buka Daftar Chat",
@@ -107,6 +108,8 @@ const id: PartialLocaleType = {
       "Jika Anda mereset, riwayat obrolan saat ini dan memori historis akan dihapus. Apakah Anda yakin ingin melakukan reset?",
   },
   Home: {
+    Title: "ChatGPT Next",
+    Slogn: "Build your own AI assistant.",
     NewChat: "Obrolan Baru",
     DeleteChat: "Anda yakin ingin menghapus percakapan yang dipilih?",
     DeleteToast: "Percakapan telah dihapus",
@@ -369,8 +372,8 @@ const id: PartialLocaleType = {
   },
   Exporter: {
     Description: {
-      Title: "Hanya pesan setelah menghapus konteks yang akan ditampilkan"
-    },  
+      Title: "Hanya pesan setelah menghapus konteks yang akan ditampilkan",
+    },
     Model: "Model",
     Messages: "Pesan",
     Topic: "Topik",

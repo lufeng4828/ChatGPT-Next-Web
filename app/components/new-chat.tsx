@@ -5,9 +5,7 @@ import { EmojiAvatar } from "./emoji";
 import styles from "./new-chat.module.scss";
 
 import LeftIcon from "../icons/left.svg";
-import LightningIcon from "../icons/lightning.svg";
-import EyeIcon from "../icons/eye.svg";
-
+import { getClientConfig } from "../config/client";
 import { useLocation, useNavigate } from "react-router-dom";
 import { Mask, useMaskStore } from "../store/mask";
 import Locale from "../locales";
@@ -16,6 +14,7 @@ import { MaskAvatar } from "./mask";
 import { useCommand } from "../command";
 import { showConfirm } from "./ui-lib";
 import { BUILTIN_MASK_STORE } from "../masks";
+import { useMobileScreen } from "../utils";
 
 function MaskItem(props: { mask: Mask; onClick?: () => void }) {
   return (
@@ -102,6 +101,9 @@ export function NewChat() {
       }
     },
   });
+  const isMobileScreen = useMobileScreen();
+  const clientConfig = getClientConfig();
+  const showMaxIcon = !isMobileScreen && !clientConfig?.isApp;
 
   useEffect(() => {
     if (maskRef.current) {
@@ -118,19 +120,32 @@ export function NewChat() {
           text={Locale.NewChat.Return}
           onClick={() => navigate(Path.Home)}
         ></IconButton>
-        {!state?.fromHome && (
-          <IconButton
-            text={Locale.NewChat.NotShow}
-            onClick={async () => {
-              if (await showConfirm(Locale.NewChat.ConfirmNoShow)) {
-                startChat();
-                config.update(
-                  (config) => (config.dontShowMaskSplashScreen = true),
-                );
-              }
-            }}
-          ></IconButton>
-        )}
+        <div className="window-actions">
+          {showMaxIcon && (
+            <div className="window-action-button">
+              <IconButton
+                icon={
+                  config.tightBorder ? (
+                    <i
+                      className="iconfont icon-quanjusuoxiao"
+                      style={{ fontSize: "14px" }}
+                    ></i>
+                  ) : (
+                    <i
+                      className="iconfont icon-bg-fullscreen"
+                      style={{ fontSize: "14px" }}
+                    ></i>
+                  )
+                }
+                onClick={() => {
+                  config.update(
+                    (config) => (config.tightBorder = !config.tightBorder),
+                  );
+                }}
+              />
+            </div>
+          )}
+        </div>
       </div>
       <div className={styles["mask-cards"]}>
         <div className={styles["mask-card"]}>
@@ -151,7 +166,7 @@ export function NewChat() {
         <IconButton
           text={Locale.NewChat.More}
           onClick={() => navigate(Path.Masks)}
-          icon={<EyeIcon />}
+          icon={<i className="iconfont icon-31quanbushangpin"></i>}
           bordered
           shadow
         />
@@ -159,7 +174,7 @@ export function NewChat() {
         <IconButton
           text={Locale.NewChat.Skip}
           onClick={() => startChat()}
-          icon={<LightningIcon />}
+          icon={<i className="iconfont icon-kuaijie"></i>}
           type="primary"
           shadow
           className={styles["skip"]}

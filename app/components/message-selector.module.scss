@@ -35,7 +35,7 @@
 
   .messages {
     margin-top: 20px;
-    border-radius: 10px;
+    border-radius: 6px;
     border: var(--border-in-light);
     overflow: hidden;
 
@@ -46,7 +46,7 @@
       cursor: pointer;
 
       &-selected {
-        background-color: var(--second);
+        background-color: var(--second-color);
       }
 
       &:not(:last-child) {

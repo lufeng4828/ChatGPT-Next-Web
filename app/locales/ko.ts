@@ -12,6 +12,7 @@ const ko: PartialLocaleType = {
     ChatItemCount: (count: number) => `${count}개의 메시지`,
   },
   Chat: {
+    Name: "Chat",
     SubTitle: (count: number) => `ChatGPT와의 ${count}개의 메시지`,
     Actions: {
       ChatList: "채팅 목록으로 이동",
@@ -54,6 +55,8 @@ const ko: PartialLocaleType = {
       "재설정하면 현재 대화 기록과 기억력이 삭제됩니다. 정말 재설정하시겠습니까?",
   },
   Home: {
+    Title: "ChatGPT Next",
+    Slogn: "Build your own AI assistant.",
     NewChat: "새로운 채팅",
     DeleteChat: "선택한 대화를 삭제하시겠습니까?",
     DeleteToast: "채팅이 삭제되었습니다.",

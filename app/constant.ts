@@ -1,4 +1,4 @@
-export const OWNER = "Yidadaa";
+export const OWNER = "lufeng4828";
 export const REPO = "ChatGPT-Next-Web";
 export const REPO_URL = `https://github.com/${OWNER}/${REPO}`;
 export const ISSUE_URL = `https://github.com/${OWNER}/${REPO}/issues`;
@@ -46,9 +46,9 @@ export enum StoreKey {
   Sync = "sync",
 }
 
-export const DEFAULT_SIDEBAR_WIDTH = 300;
+export const DEFAULT_SIDEBAR_WIDTH = 315;
 export const MAX_SIDEBAR_WIDTH = 500;
-export const MIN_SIDEBAR_WIDTH = 230;
+export const MIN_SIDEBAR_WIDTH = 260;
 export const NARROW_SIDEBAR_WIDTH = 100;
 
 export const ACCESS_CODE_PREFIX = "nk-";

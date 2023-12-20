@@ -11,6 +11,7 @@ const cs: PartialLocaleType = {
     ChatItemCount: (count: number) => `${count} zpráv`,
   },
   Chat: {
+    Name: "Chat",
     SubTitle: (count: number) => `${count} zpráv s ChatGPT`,
     Actions: {
       ChatList: "Přejít na seznam chatů",
@@ -53,6 +54,8 @@ const cs: PartialLocaleType = {
       "Resetováním se vymaže historie aktuálních konverzací i paměť historie pokynů. Opravdu chcete provést obnovu?",
   },
   Home: {
+    Title: "ChatGPT Next",
+    Slogn: "Build your own AI assistant.",
     NewChat: "Nový chat",
     DeleteChat: "Potvrzujete smazání vybrané konverzace?",
     DeleteToast: "Chat smazán",

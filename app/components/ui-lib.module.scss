@@ -2,7 +2,7 @@
 
 .card {
   background-color: var(--white);
-  border-radius: 10px;
+  border-radius: 6px;
   box-shadow: var(--card-shadow);
   padding: 10px;
 }
@@ -31,9 +31,11 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  min-height: 40px;
-  border-bottom: var(--border-in-light);
-  padding: 10px 20px;
+  min-height: 28px;
+  padding: 10px;
+  background: var(--gray);
+  border-radius: 6px;
+  margin-top: 10px;
   animation: slide-in ease 0.6s;
 
   .list-header {
@@ -45,24 +47,24 @@
     }
 
     .list-item-title {
-      font-size: 14px;
-      font-weight: bolder;
+      font-size: 13px;
+      font-weight: bold;
     }
 
     .list-item-sub-title {
       font-size: 12px;
+      margin-top: 5px;
+      color: #a2a2a2;
       font-weight: normal;
     }
   }
 }
 
 .list {
-  border: var(--border-in-light);
-  border-radius: 10px;
-  box-shadow: var(--card-shadow);
   margin-bottom: 20px;
   animation: slide-in ease 0.3s;
   background: var(--white);
+  border-radius: 6px;
 }
 
 .list .list-item:last-child {
@@ -72,7 +74,7 @@
 .modal-container {
   box-shadow: var(--card-shadow);
   background-color: var(--white);
-  border-radius: 12px;
+  border-radius: 9px;
   width: 80vw;
   max-width: 900px;
   min-width: 300px;
@@ -132,9 +134,6 @@
     padding: var(--modal-padding);
     display: flex;
     justify-content: flex-end;
-    border-top: var(--border-in-light);
-    box-shadow: var(--shadow);
-
     .modal-actions {
       display: flex;
       align-items: center;
@@ -203,7 +202,7 @@
 
     .toast-action {
       padding-left: 20px;
-      color: var(--primary);
+      color: var(--primary-color);
       opacity: 0.8;
       border: 0;
       background: none;
@@ -219,7 +218,7 @@
 
 .input {
   border: var(--border-in-light);
-  border-radius: 10px;
+  border-radius: 6px;
   padding: 10px;
   font-family: inherit;
   background-color: var(--white);
@@ -234,12 +233,9 @@
 
   .select-with-icon-select {
     height: 100%;
-    border: var(--border-in-light);
     padding: 10px 35px 10px 10px;
-    border-radius: 10px;
     appearance: none;
     cursor: pointer;
-    background-color: var(--white);
     color: var(--black);
     text-align: center;
   }
@@ -256,7 +252,7 @@
 .modal-input {
   height: 100%;
   width: 100%;
-  border-radius: 10px;
+  border-radius: 6px;
   border: var(--border-in-light);
   box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.03);
   background-color: var(--white);
@@ -268,21 +264,30 @@
   box-sizing: border-box;
 
   &:focus {
-    border: 1px solid var(--primary);
+    border: 1px solid var(--primary-color);
   }
 }
 
 .selector {
   position: fixed;
-  top: 0;
+  top: 100px;
   left: 0;
   height: 100vh;
   width: 100vw;
-  background-color: rgba(0, 0, 0, 0.5);
   display: flex;
   align-items: center;
   justify-content: center;
   z-index: 999;
+
+  .list {
+    background: var(--white-2);
+    .list-item {
+      padding: 4px 8px;
+    }
+    .list-item-title {
+      font-size: 12px;
+    }
+  }
 
   &-content {
     .list {
@@ -292,7 +297,7 @@
 
       .list-item {
         cursor: pointer;
-        background-color: var(--white);
+        background-color: var(--white-2);
 
         &:hover {
           filter: brightness(0.95);

@@ -1,10 +1,10 @@
 .icon-button {
   background-color: var(--white);
-  border-radius: 10px;
+  border-radius: 6px;
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 10px;
+  padding: 4px 8px;
 
   cursor: pointer;
   transition: all 0.3s ease;
@@ -20,7 +20,7 @@
   }
 
   &.primary {
-    background-color: var(--primary);
+    background-color: var(--primary-color);
     color: white;
 
     path {
@@ -42,11 +42,6 @@
       fill: red !important;
     }
   }
-
-  &:hover,
-  &:focus {
-    border-color: var(--primary);
-  }
 }
 
 .shadow {
@@ -58,8 +53,8 @@
 }
 
 .icon-button-icon {
-  width: 16px;
-  height: 16px;
+  width: 32px;
+  height: 32px;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -72,12 +67,9 @@
 }
 
 .icon-button-text {
-  font-size: 12px;
+  font-size: 13px;
   overflow: hidden;
+  text-align: center;
   text-overflow: ellipsis;
   white-space: nowrap;
-
-  &:not(:first-child) {
-    margin-left: 5px;
-  }
 }

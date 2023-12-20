@@ -19,6 +19,7 @@ import { Mask } from "../store/mask";
 import { useRef, useEffect } from "react";
 import { showConfirm } from "./ui-lib";
 import { useMobileScreen } from "../utils";
+import { Avatar } from "./emoji";
 
 export function ChatItem(props: {
   onClick?: () => void;
@@ -72,12 +73,34 @@ export function ChatItem(props: {
             </div>
           ) : (
             <>
-              <div className={styles["chat-item-title"]}>{props.title}</div>
-              <div className={styles["chat-item-info"]}>
-                <div className={styles["chat-item-count"]}>
-                  {Locale.ChatItem.ChatItemCount(props.count)}
+              <div className={styles["chat-item-inner"]}>
+                <div
+                  className={
+                    styles["chat-item-avatar"] +
+                    " no-dark " +
+                    styles["chat-item-inner-sub"]
+                  }
+                >
+                  <MaskAvatar
+                    size={35}
+                    style={{
+                      background: getComputedStyle(
+                        document.documentElement,
+                      ).getPropertyValue("--primary-color"),
+                    }}
+                    avatar={props.mask.avatar}
+                    model={props.mask.modelConfig.model}
+                  />
                 </div>
-                <div className={styles["chat-item-date"]}>{props.time}</div>
+                <div className={styles["chat-item-inner-desc"]}>
+                  <div className={styles["chat-item-title"]}>{props.title}</div>
+                  <div className={styles["chat-item-info"]}>
+                    <div className={styles["chat-item-count"]}>
+                      {Locale.ChatItem.ChatItemCount(props.count)}
+                    </div>
+                    <div className={styles["chat-item-date"]}>{props.time}</div>
+                  </div>
+                </div>
               </div>
             </>
           )}
@@ -90,7 +113,7 @@ export function ChatItem(props: {
               e.stopPropagation();
             }}
           >
-            <DeleteIcon />
+            {<i className="iconfont icon-shanchu"></i>}
           </div>
         </div>
       )}
@@ -110,7 +133,7 @@ export function ChatList(props: { narrow?: boolean }) {
   const chatStore = useChatStore();
   const navigate = useNavigate();
   const isMobileScreen = useMobileScreen();
-
+  console.log("sessions", sessions);
   const onDragEnd: OnDragEndResponder = (result) => {
     const { destination, source } = result;
     if (!destination) {

@@ -10,9 +10,11 @@
 
   .mask-header {
     display: flex;
+    position: relative;
     justify-content: space-between;
     width: 100%;
-    padding: 10px;
+    padding: 14px 20px;
+    align-items: center;
     box-sizing: border-box;
     animation: slide-in-from-top ease 0.3s;
   }
@@ -102,7 +104,7 @@
         border: var(--border-in-light);
         box-shadow: var(--card-shadow);
         background-color: var(--white);
-        border-radius: 10px;
+        border-radius: 6px;
         margin-right: 10px;
         max-width: 8em;
         transform: scale(1);
@@ -112,7 +114,7 @@
         &:hover {
           transform: translateY(-5px) scale(1.1);
           z-index: 999;
-          border-color: var(--primary);
+          border-color: var(--primary-color);
         }
 
         .mask-name {

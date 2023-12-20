@@ -59,11 +59,27 @@ function reorder<T>(list: T[], startIndex: number, endIndex: number): T[] {
   return result;
 }
 
-export function MaskAvatar(props: { avatar: string; model?: ModelType }) {
+export function MaskAvatar(props: {
+  avatar: string;
+  model?: ModelType;
+  showModel?: boolean;
+  size?: number;
+  style?: any;
+}) {
   return props.avatar !== DEFAULT_MASK_AVATAR ? (
-    <Avatar avatar={props.avatar} />
+    <Avatar
+      showModel={props.showModel}
+      avatar={props.avatar}
+      size={props.size}
+      style={props.style}
+    />
   ) : (
-    <Avatar model={props.model} />
+    <Avatar
+      showModel={props.showModel}
+      model={props.model}
+      size={props.size}
+      style={props.style}
+    />
   );
 }
 
@@ -246,6 +262,7 @@ function ContextPromptItem(props: {
       <Input
         value={props.prompt.content}
         type="text"
+        placeholder={Locale.Chat.EditMessage.Placeholder}
         className={chatStyle["context-content"]}
         rows={focusingInput ? 5 : 1}
         onFocus={() => setFocusingInput(true)}
@@ -264,7 +281,7 @@ function ContextPromptItem(props: {
       />
       {!focusingInput && (
         <IconButton
-          icon={<DeleteIcon />}
+          icon={<i className="iconfont icon-shanchu"></i>}
           className={chatStyle["context-delete-button"]}
           onClick={() => props.remove()}
           bordered
@@ -331,21 +348,6 @@ export function ContextPrompts(props: {
                           update={(prompt) => updateContextPrompt(i, prompt)}
                           remove={() => removeContextPrompt(i)}
                         />
-                        <div
-                          className={chatStyle["context-prompt-insert"]}
-                          onClick={() => {
-                            addContextPrompt(
-                              createMessage({
-                                role: "user",
-                                content: "",
-                                date: new Date().toLocaleString(),
-                              }),
-                              i + 1,
-                            );
-                          }}
-                        >
-                          <AddIcon />
-                        </div>
                       </div>
                     )}
                   </Draggable>
@@ -355,27 +357,24 @@ export function ContextPrompts(props: {
             )}
           </Droppable>
         </DragDropContext>
-
-        {props.context.length === 0 && (
-          <div className={chatStyle["context-prompt-row"]}>
-            <IconButton
-              icon={<AddIcon />}
-              text={Locale.Context.Add}
-              bordered
-              className={chatStyle["context-prompt-button"]}
-              onClick={() =>
-                addContextPrompt(
-                  createMessage({
-                    role: "user",
-                    content: "",
-                    date: "",
-                  }),
-                  props.context.length,
-                )
-              }
-            />
-          </div>
-        )}
+        <div className={chatStyle["context-prompt-row"]}>
+          <IconButton
+            icon={<i className="iconfont icon-a-ziliaocaozuoxinzeng"></i>}
+            text={Locale.Context.Add}
+            bordered
+            className={chatStyle["context-prompt-button"]}
+            onClick={() =>
+              addContextPrompt(
+                createMessage({
+                  role: "user",
+                  content: "",
+                  date: "",
+                }),
+                props.context.length,
+              )
+            }
+          />
+        </div>
       </div>
     </>
   );
@@ -455,16 +454,14 @@ export function MaskPage() {
           <div className="window-actions">
             <div className="window-action-button">
               <IconButton
-                icon={<DownloadIcon />}
+                icon={<i className="iconfont icon-daochu1"></i>}
                 bordered
                 onClick={downloadAll}
-                text={Locale.UI.Export}
               />
             </div>
             <div className="window-action-button">
               <IconButton
-                icon={<UploadIcon />}
-                text={Locale.UI.Import}
+                icon={<i className="iconfont icon-daoru1"></i>}
                 bordered
                 onClick={() => importFromFile()}
               />
@@ -526,21 +523,37 @@ export function MaskPage() {
             {masks.map((m) => (
               <div className={styles["mask-item"]} key={m.id}>
                 <div className={styles["mask-header"]}>
-                  <div className={styles["mask-icon"]}>
-                    <MaskAvatar avatar={m.avatar} model={m.modelConfig.model} />
+                  <div className={styles["mask-item-avatar"]}>
+                    <MaskAvatar
+                      style={{
+                        height: "30px",
+                        minHeight: "30px",
+                        width: "30px",
+                        minWidth: "30px",
+                        background: "rgb(80 223 154)",
+                      }}
+                      avatar={m.avatar}
+                      model={m.modelConfig.model}
+                    />
                   </div>
                   <div className={styles["mask-title"]}>
                     <div className={styles["mask-name"]}>{m.name}</div>
                     <div className={styles["mask-info"] + " one-line"}>
-                      {`${Locale.Mask.Item.Info(m.context.length)} / ${
-                        ALL_LANG_OPTIONS[m.lang]
-                      } / ${m.modelConfig.model}`}
+                      <span className="tag-default tag margin-right-1">
+                        {Locale.Mask.Item.Info(m.context.length)}
+                      </span>
+                      <span className="tag-default tag margin-right-1">
+                        {ALL_LANG_OPTIONS[m.lang]}
+                      </span>
+                      <span className="tag-default tag">
+                        {m.modelConfig.model}
+                      </span>
                     </div>
                   </div>
                 </div>
                 <div className={styles["mask-actions"]}>
                   <IconButton
-                    icon={<AddIcon />}
+                    icon={<i className="iconfont icon-xiaoxi"></i>}
                     text={Locale.Mask.Item.Chat}
                     onClick={() => {
                       chatStore.newSession(m);
@@ -549,20 +562,20 @@ export function MaskPage() {
                   />
                   {m.builtin ? (
                     <IconButton
-                      icon={<EyeIcon />}
+                      icon={<i className="iconfont icon-mima-mingwen"></i>}
                       text={Locale.Mask.Item.View}
                       onClick={() => setEditingMaskId(m.id)}
                     />
                   ) : (
                     <IconButton
-                      icon={<EditIcon />}
+                      icon={<i className="iconfont icon-bianji"></i>}
                       text={Locale.Mask.Item.Edit}
                       onClick={() => setEditingMaskId(m.id)}
                     />
                   )}
                   {!m.builtin && (
                     <IconButton
-                      icon={<DeleteIcon />}
+                      icon={<i className="iconfont icon-shanchu1"></i>}
                       text={Locale.Mask.Item.Delete}
                       onClick={async () => {
                         if (await showConfirm(Locale.Mask.Item.DeleteConfirm)) {
@@ -585,7 +598,7 @@ export function MaskPage() {
             onClose={closeMaskModal}
             actions={[
               <IconButton
-                icon={<DownloadIcon />}
+                icon={<i className="iconfont icon-yunduanxiazai"></i>}
                 text={Locale.Mask.EditModal.Download}
                 key="export"
                 bordered

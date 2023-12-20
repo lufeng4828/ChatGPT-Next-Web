@@ -24,9 +24,11 @@ const en: LocaleType = {
     ChatItemCount: (count: number) => `${count} messages`,
   },
   Chat: {
+    Name: "Chat",
     SubTitle: (count: number) => `${count} messages`,
     EditMessage: {
       Title: "Edit All Messages",
+      Placeholder: "Please input messages",
       Topic: {
         Title: "Topic",
         SubTitle: "Change the current topic",
@@ -122,6 +124,8 @@ const en: LocaleType = {
       "Resetting will clear the current conversation history and historical memory. Are you sure you want to reset?",
   },
   Home: {
+    Title: "ChatGPT Next",
+    Slogn: "Build your own AI assistant.",
     NewChat: "New Chat",
     DeleteChat: "Confirm to delete the selected conversation?",
     DeleteToast: "Chat Deleted",
@@ -380,7 +384,7 @@ const en: LocaleType = {
     Sysmessage: "You are an assistant that",
   },
   Mask: {
-    Name: "Mask",
+    Name: "Discover",
     Page: {
       Title: "Prompt Template",
       SubTitle: (count: number) => `${count} prompt templates`,
@@ -443,8 +447,8 @@ const en: LocaleType = {
   },
   Exporter: {
     Description: {
-      Title: "Only messages after clearing the context will be displayed"
-    },  
+      Title: "Only messages after clearing the context will be displayed",
+    },
     Model: "Model",
     Messages: "Messages",
     Topic: "Topic",

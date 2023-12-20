@@ -3,19 +3,16 @@ import { useEffect, useRef, useMemo } from "react";
 import styles from "./home.module.scss";
 
 import { IconButton } from "./button";
-import SettingsIcon from "../icons/settings.svg";
-import GithubIcon from "../icons/github.svg";
 import ChatGptIcon from "../icons/chatgpt.svg";
 import AddIcon from "../icons/add.svg";
-import CloseIcon from "../icons/close.svg";
 import DeleteIcon from "../icons/delete.svg";
-import MaskIcon from "../icons/mask.svg";
-import PluginIcon from "../icons/plugin.svg";
 import DragIcon from "../icons/drag.svg";
 
 import Locale from "../locales";
+import { useLocation } from "react-router-dom";
 
 import { useAppConfig, useChatStore } from "../store";
+import { SidebarNav } from "./sidebar-nav";
 
 import {
   DEFAULT_SIDEBAR_WIDTH,
@@ -29,7 +26,7 @@ import {
 import { Link, useNavigate } from "react-router-dom";
 import { isIOS, useMobileScreen } from "../utils";
 import dynamic from "next/dynamic";
-import { showConfirm, showToast } from "./ui-lib";
+import { Mask } from "../store/mask";
 
 const ChatList = dynamic(async () => (await import("./chat-list")).ChatList, {
   loading: () => null,
@@ -87,7 +84,7 @@ function useDragSideBar() {
       const nextWidth = limit(startDragWidth.current + d);
       config.update((config) => {
         if (nextWidth < MIN_SIDEBAR_WIDTH) {
-          config.sidebarWidth = NARROW_SIDEBAR_WIDTH;
+          config.sidebarWidth = MIN_SIDEBAR_WIDTH;
         } else {
           config.sidebarWidth = nextWidth;
         }
@@ -116,9 +113,10 @@ function useDragSideBar() {
 
   useEffect(() => {
     const barWidth = shouldNarrow
-      ? NARROW_SIDEBAR_WIDTH
+      ? MIN_SIDEBAR_WIDTH
       : limit(config.sidebarWidth ?? DEFAULT_SIDEBAR_WIDTH);
     const sideBarWidth = isMobileScreen ? "100vw" : `${barWidth}px`;
+
     document.documentElement.style.setProperty("--sidebar-width", sideBarWidth);
   }, [config.sidebarWidth, isMobileScreen, shouldNarrow]);
 
@@ -141,104 +139,80 @@ export function SideBar(props: { className?: string }) {
     [isMobileScreen],
   );
 
+  const location = useLocation();
+  const isChat =
+    location.pathname === Path.Chat || location.pathname == Path.Home;
+
   useHotKey();
+
+  const startChat = (mask?: Mask) => {
+    setTimeout(() => {
+      chatStore.newSession(mask);
+      navigate(Path.Chat);
+    }, 10);
+  };
 
   return (
     <div
-      className={`${styles.sidebar} ${props.className} ${
-        shouldNarrow && styles["narrow-sidebar"]
-      }`}
+      className={`${styles.sidebar} ${props.className}`}
       style={{
         // #3016 disable transition on ios mobile screen
         transition: isMobileScreen && isIOSMobile ? "none" : undefined,
       }}
     >
-      <div className={styles["sidebar-header"]} data-tauri-drag-region>
-        <div className={styles["sidebar-title"]} data-tauri-drag-region>
-          ChatGPT Next
-        </div>
-        <div className={styles["sidebar-sub-title"]}>
-          Build your own AI assistant.
-        </div>
-        <div className={styles["sidebar-logo"] + " no-dark"}>
-          <ChatGptIcon />
-        </div>
-      </div>
-
-      <div className={styles["sidebar-header-bar"]}>
-        <IconButton
-          icon={<MaskIcon />}
-          text={shouldNarrow ? undefined : Locale.Mask.Name}
-          className={styles["sidebar-bar-button"]}
-          onClick={() => {
-            if (config.dontShowMaskSplashScreen !== true) {
-              navigate(Path.NewChat, { state: { fromHome: true } });
-            } else {
-              navigate(Path.Masks, { state: { fromHome: true } });
-            }
-          }}
-          shadow
-        />
-        <IconButton
-          icon={<PluginIcon />}
-          text={shouldNarrow ? undefined : Locale.Plugin.Name}
-          className={styles["sidebar-bar-button"]}
-          onClick={() => showToast(Locale.WIP)}
-          shadow
-        />
-      </div>
-
-      <div
-        className={styles["sidebar-body"]}
-        onClick={(e) => {
-          if (e.target === e.currentTarget) {
-            navigate(Path.Home);
-          }
-        }}
-      >
-        <ChatList narrow={shouldNarrow} />
-      </div>
-
-      <div className={styles["sidebar-tail"]}>
-        <div className={styles["sidebar-actions"]}>
-          <div className={styles["sidebar-action"] + " " + styles.mobile}>
-            <IconButton
-              icon={<DeleteIcon />}
-              onClick={async () => {
-                if (await showConfirm(Locale.Home.DeleteChat)) {
-                  chatStore.deleteSession(chatStore.currentSessionIndex);
-                }
-              }}
-            />
+      {!isMobileScreen && <SidebarNav />}
+      {isChat && (
+        <div
+          className={`${styles["sidebar-right"]} ${
+            shouldNarrow && styles["narrow-sidebar"]
+          }`}
+        >
+          <div className={styles["sidebar-header"]} data-tauri-drag-region>
+            <div className={styles["sidebar-title"]} data-tauri-drag-region>
+              {Locale.Home.Title}
+            </div>
+            <div className={styles["sidebar-sub-title"]}>
+              {Locale.Home.Slogn}
+            </div>
+            {isMobileScreen && (
+              <div className={styles["sidebar-logo"] + " no-dark"}>
+                <ChatGptIcon />
+              </div>
+            )}
+            {!isMobileScreen && (
+              <div className={styles["sidebar-toolbar"]}>
+                <IconButton
+                  icon={<AddIcon />}
+                  onClick={() => {
+                    if (config.dontShowMaskSplashScreen) {
+                      chatStore.newSession();
+                      navigate(Path.Chat);
+                    } else {
+                      startChat();
+                    }
+                  }}
+                  shadow
+                />
+              </div>
+            )}
           </div>
-          <div className={styles["sidebar-action"]}>
-            <Link to={Path.Settings}>
-              <IconButton icon={<SettingsIcon />} shadow />
-            </Link>
-          </div>
-          <div className={styles["sidebar-action"]}>
-            <a href={REPO_URL} target="_blank" rel="noopener noreferrer">
-              <IconButton icon={<GithubIcon />} shadow />
-            </a>
-          </div>
-        </div>
-        <div>
-          <IconButton
-            icon={<AddIcon />}
-            text={shouldNarrow ? undefined : Locale.Home.NewChat}
-            onClick={() => {
-              if (config.dontShowMaskSplashScreen) {
-                chatStore.newSession();
-                navigate(Path.Chat);
-              } else {
-                navigate(Path.NewChat);
+          <div
+            className={styles["sidebar-body"]}
+            onClick={(e) => {
+              if (e.target === e.currentTarget) {
+                navigate(Path.Home);
               }
             }}
-            shadow
-          />
+          >
+            <ChatList narrow={shouldNarrow} />
+          </div>
         </div>
-      </div>
-
+      )}
+      {isMobileScreen && (
+        <div className={styles["sidebar-tail"]}>
+          <SidebarNav />
+        </div>
+      )}
       <div
         className={styles["sidebar-drag"]}
         onPointerDown={(e) => onDragStart(e as any)}

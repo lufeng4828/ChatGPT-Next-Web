@@ -10,6 +10,7 @@ const tw: PartialLocaleType = {
     ChatItemCount: (count: number) => `${count} 則對話`,
   },
   Chat: {
+    Name: "聊天",
     SubTitle: (count: number) => `您已經與 ChatGPT 進行了 ${count} 則對話`,
     Actions: {
       ChatList: "檢視訊息列表",
@@ -51,6 +52,8 @@ const tw: PartialLocaleType = {
     ResetConfirm: "重設後將清除目前對話記錄以及歷史記憶，確認重設？",
   },
   Home: {
+    Title: "ChatGPT Next",
+    Slogn: "Build your own AI assistant.",
     NewChat: "新的對話",
     DeleteChat: "確定要刪除選取的對話嗎？",
     DeleteToast: "已刪除對話",
@@ -174,7 +177,7 @@ const tw: PartialLocaleType = {
   Plugin: { Name: "外掛" },
   FineTuned: { Sysmessage: "你是一個助手" },
   Mask: {
-    Name: "面具",
+    Name: "发现",
     Page: {
       Title: "預設角色面具",
       SubTitle: (count: number) => `${count} 個預設角色定義`,

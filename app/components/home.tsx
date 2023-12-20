@@ -8,8 +8,14 @@ import styles from "./home.module.scss";
 
 import BotIcon from "../icons/bot.svg";
 import LoadingIcon from "../icons/three-dots.svg";
+import "../styles/iconfont/iconfont.css";
 
 import { getCSSVar, useMobileScreen } from "../utils";
+import {
+  DEFAULT_SIDEBAR_WIDTH,
+  MIN_SIDEBAR_WIDTH,
+  MAX_SIDEBAR_WIDTH,
+} from "../constant";
 
 import dynamic from "next/dynamic";
 import { Path, SlotID } from "../constant";
@@ -127,8 +133,26 @@ function Screen() {
   const location = useLocation();
   const isHome = location.pathname === Path.Home;
   const isAuth = location.pathname === Path.Auth;
+  const isChat =
+    location.pathname === Path.Chat || location.pathname == Path.Home;
   const isMobileScreen = useMobileScreen();
-  const shouldTightBorder = getClientConfig()?.isApp || (config.tightBorder && !isMobileScreen);
+  const shouldTightBorder =
+    getClientConfig()?.isApp || (config.tightBorder && !isMobileScreen);
+
+  const shouldNarrow =
+    !isMobileScreen && config.sidebarWidth < MIN_SIDEBAR_WIDTH;
+  const limit = (x: number) => Math.min(MAX_SIDEBAR_WIDTH, x);
+  useEffect(() => {
+    const barWidth = shouldNarrow
+      ? MIN_SIDEBAR_WIDTH
+      : limit(config.sidebarWidth ?? DEFAULT_SIDEBAR_WIDTH);
+    const sideBarWidth = isMobileScreen ? "100vw" : `${barWidth}px`;
+
+    document.documentElement.style.setProperty(
+      "--sidebar-width",
+      isChat ? sideBarWidth : "0px",
+    );
+  }, [config.sidebarWidth, isMobileScreen, shouldNarrow, isChat]);
 
   useEffect(() => {
     loadAsyncGoogleFont();
@@ -150,7 +174,6 @@ function Screen() {
       ) : (
         <>
           <SideBar className={isHome ? styles["sidebar-show"] : ""} />
-
           <div className={styles["window-content"]} id={SlotID.AppBody}>
             <Routes>
               <Route path={Path.Home} element={<Chat />} />

@@ -11,6 +11,7 @@ const vi: PartialLocaleType = {
     ChatItemCount: (count: number) => `${count} tin nhắn`,
   },
   Chat: {
+    Name: "Chat",
     SubTitle: (count: number) => `${count} tin nhắn với ChatGPT`,
     Actions: {
       ChatList: "Xem danh sách chat",
@@ -53,6 +54,8 @@ const vi: PartialLocaleType = {
       "Đặt lại sẽ xóa toàn bộ lịch sử trò chuyện hiện tại và bộ nhớ. Bạn có chắc chắn muốn đặt lại không?",
   },
   Home: {
+    Title: "ChatGPT Next",
+    Slogn: "Build your own AI assistant.",
     NewChat: "Cuộc trò chuyện mới",
     DeleteChat: "Xác nhận xóa các cuộc trò chuyện đã chọn?",
     DeleteToast: "Đã xóa cuộc trò chuyện",

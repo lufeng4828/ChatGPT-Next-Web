@@ -11,6 +11,7 @@ const tr: PartialLocaleType = {
     ChatItemCount: (count: number) => `${count} mesaj`,
   },
   Chat: {
+    Name: "Chat",
     SubTitle: (count: number) => `ChatGPT tarafından ${count} mesaj`,
     Actions: {
       ChatList: "Sohbet Listesine Git",
@@ -53,6 +54,8 @@ const tr: PartialLocaleType = {
       "Sıfırlama, geçerli görüşme geçmişini ve geçmiş belleği siler. Sıfırlamak istediğinizden emin misiniz?",
   },
   Home: {
+    Title: "ChatGPT Next",
+    Slogn: "Build your own AI assistant.",
     NewChat: "Yeni Sohbet",
     DeleteChat: "Seçili sohbeti silmeyi onaylıyor musunuz?",
     DeleteToast: "Sohbet Silindi",

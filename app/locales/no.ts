@@ -11,6 +11,7 @@ const no: PartialLocaleType = {
     ChatItemCount: (count: number) => `${count} meldinger`,
   },
   Chat: {
+    Name: "Chat",
     SubTitle: (count: number) => `${count} meldinger med ChatGPT`,
     Actions: {
       ChatList: "Gå til chatlisten",
@@ -49,6 +50,8 @@ const no: PartialLocaleType = {
       "Om du nillstiller vil du slette hele historikken. Er du sikker på at du vil nullstille?",
   },
   Home: {
+    Title: "ChatGPT Next",
+    Slogn: "Build your own AI assistant.",
     NewChat: "Ny chat",
     DeleteChat: "Bekreft for å slette det valgte dialogen",
     DeleteToast: "Samtale slettet",

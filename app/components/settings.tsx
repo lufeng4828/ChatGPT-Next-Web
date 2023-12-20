@@ -329,6 +329,7 @@ function SyncConfigModal(props: { onClose?: () => void }) {
             subTitle={Locale.Settings.Sync.Config.SyncType.SubTitle}
           >
             <select
+              style={{ width: "169px", height: "36px" }}
               value={syncStore.provider}
               onChange={(e) => {
                 syncStore.update(
@@ -503,7 +504,7 @@ function SyncItems() {
         >
           <div style={{ display: "flex" }}>
             <IconButton
-              icon={<ConfigIcon />}
+              icon={<i className="iconfont icon-peizhi"></i>}
               text={Locale.UI.Config}
               onClick={() => {
                 setShowSyncConfigModal(true);
@@ -531,16 +532,17 @@ function SyncItems() {
           title={Locale.Settings.Sync.LocalState}
           subTitle={Locale.Settings.Sync.Overview(stateOverview)}
         >
-          <div style={{ display: "flex" }}>
+          <div style={{ display: "flex", gap: "10px" }}>
             <IconButton
-              icon={<UploadIcon />}
+              icon={<i className="iconfont icon-daochu1"></i>}
               text={Locale.UI.Export}
               onClick={() => {
                 syncStore.export();
               }}
             />
+
             <IconButton
-              icon={<DownloadIcon />}
+              icon={<i className="iconfont icon-daoru1"></i>}
               text={Locale.UI.Import}
               onClick={() => {
                 syncStore.import();
@@ -635,7 +637,8 @@ export function Settings() {
         navigate(Path.Home);
       }
     };
-    if (clientConfig?.isApp) { // Force to set custom endpoint to true if it's app
+    if (clientConfig?.isApp) {
+      // Force to set custom endpoint to true if it's app
       accessStore.update((state) => {
         state.useCustomConfig = true;
       });
@@ -692,7 +695,18 @@ export function Settings() {
                 className={styles.avatar}
                 onClick={() => setShowEmojiPicker(true)}
               >
-                <Avatar avatar={config.avatar} />
+                <Avatar
+                  style={{
+                    height: "30px",
+                    minHeight: "30px",
+                    width: "30px",
+                    minWidth: "30px",
+                    background: getComputedStyle(
+                      document.documentElement,
+                    ).getPropertyValue("--primary-color"),
+                  }}
+                  avatar={config.avatar}
+                />
               </div>
             </Popover>
           </ListItem>
@@ -886,7 +900,7 @@ export function Settings() {
             )}
           >
             <IconButton
-              icon={<EditIcon />}
+              icon={<i className="iconfont icon-bianji"></i>}
               text={Locale.Settings.Prompt.Edit}
               onClick={() => setShowPromptModal(true)}
             />

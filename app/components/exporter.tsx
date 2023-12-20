@@ -367,7 +367,7 @@ export function PreviewActions(props: {
           text={Locale.Export.Download}
           bordered
           shadow
-          icon={<DownloadIcon />}
+          icon={<i className="iconfont icon-yunduanxiazai"></i>}
           onClick={props.download}
         ></IconButton>
         <IconButton

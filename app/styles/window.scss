@@ -31,6 +31,22 @@
   display: inline-flex;
 }
 
+.window-action-button {
+  button:hover,
+  button:focus {
+    background: unset;
+    border: unset;
+  }
+  button {
+    padding: 0;
+    border: 0;
+    div {
+      background: var(--gray);
+      border-radius: 20px;
+    }
+  }
+}
+
 .window-action-button:not(:first-child) {
   margin-left: 10px;
 }

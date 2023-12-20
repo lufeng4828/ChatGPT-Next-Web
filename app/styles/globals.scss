@@ -3,35 +3,63 @@
 
 @mixin light {
   --theme: light;
-
+  --bar-width: 68px;
   /* color */
   --white: white;
+  --white-2: white;
   --black: rgb(48, 48, 48);
   --gray: rgb(250, 250, 250);
-  --primary: rgb(29, 147, 171);
-  --second: rgb(231, 248, 255);
+  --td-bg-color-secondarycontainer: #f3f3f3;
+  --primary-color: #8250df;
+  --second-color: #fff;
+  --third-color: #f8f3fd;
+  --fourth-color: #c9f3cc;
+  --chat-text-bg: #eee;
+  --gray: #eee;
+  --gray-2: #eee;
+  --td-brand-color: #8250df;
+  --td-brand-color-focus: #c0d8ff;
+  --dark-gray: #8a8d90;
+  --bg-color-1: #c9f3cc;
   --hover-color: #f3f3f3;
   --bar-color: rgba(0, 0, 0, 0.1);
   --theme-color: var(--gray);
+  --subbar-bg: #f8f3fc;
+  --item-select-color: rgb(236 220 253);
+  --active-color: #8250df;
 
   /* shadow */
-  --shadow: 50px 50px 100px 10px rgb(0, 0, 0, 0.1);
-  --card-shadow: 0px 2px 4px 0px rgb(0, 0, 0, 0.05);
+  --shadow: 0px 3px 14px 2px rgba(0, 0, 0, 0.05),
+    0px 8px 10px 1px rgba(0, 0, 0, 0.06), 0px 5px 5px -3px rgba(0, 0, 0, 0.1);
+  --card-shadow: 0px 2px 4px 0px rgba(0, 0, 0, 0.05);
 
   /* stroke */
-  --border-in-light: 1px solid rgb(222, 222, 222);
+  --border-in-light: 0.5px solid #dcdcdc;
 }
 
 @mixin dark {
   --theme: dark;
-
+  --bar-width: 68px;
+  --chat-text-bg: ffffff1a;
   /* color */
-  --white: rgb(30, 30, 30);
+  --white: #1e1e1e;
   --black: rgb(187, 187, 187);
-  --gray: rgb(21, 21, 21);
-  --primary: rgb(29, 147, 171);
-  --second: rgb(27 38 42);
+  --gray: #eeeeee14;
+  --gray-2: #393939;
+  --white-2: #393939;
+  --td-brand-color: #8250df;
+  --td-bg-color-secondarycontainer: #c0d8ff28;
+  --td-brand-color-focus: #c0d8ff3e;
+  --dark-gray: #ccc;
+  --primary-color: #8250df;
+  --second-color: rgb(27 38 42);
+  --third-color: #f8f3fd;
+  --fourth-color: #c9f3cc;
   --hover-color: #323232;
+  --bg-color-1: #c9f3cc2b;
+  --subbar-bg: #1e1e1e;
+  --item-select-color: rgb(236 220 253 / 11%);
+  --active-color: #ae87f6;
 
   --bar-color: rgba(255, 255, 255, 0.1);
 
@@ -62,7 +90,7 @@
   --window-width: 90vw;
   --window-height: 90vh;
   --sidebar-width: 300px;
-  --window-content-width: calc(100% - var(--sidebar-width));
+  --window-content-width: calc(100% - var(--sidebar-width) - 86px);
   --message-max-width: 80%;
   --full-height: 100%;
 }
@@ -88,7 +116,6 @@
 }
 html {
   height: var(--full-height);
-
   font-family: "Noto Sans", "SF Pro SC", "SF Pro Text", "SF Pro Icons",
     "PingFang SC", "Helvetica Neue", "Helvetica", "Arial", sans-serif;
 }
@@ -108,7 +135,7 @@ body {
   overflow: hidden;
 
   @media only screen and (max-width: 600px) {
-    background-color: var(--second);
+    background-color: var(--second-color);
   }
 }
 
@@ -130,12 +157,12 @@ body {
 }
 
 select {
-  border: var(--border-in-light);
+  border: var(--white);
   padding: 10px;
-  border-radius: 10px;
+  border-radius: 6px;
   appearance: none;
   cursor: pointer;
-  background-color: var(--white);
+  background: var(--white);
   color: var(--black);
   text-align: center;
 }
@@ -147,6 +174,23 @@ label {
 input {
   text-align: center;
   font-family: inherit;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  position: relative;
+  border-width: 1px;
+  border-style: solid;
+  border-radius: 3px;
+  border-color: #dcdcdc;
+  background-color: #fff;
+  outline: none;
+  box-sizing: border-box;
+  transition:
+    border cubic-bezier(0.38, 0, 0.24, 1) 0.2s,
+    box-shadow cubic-bezier(0.38, 0, 0.24, 1) 0.2s;
+  display: flex;
+  align-items: center;
+  overflow: hidden;
 }
 
 input[type="checkbox"] {
@@ -167,7 +211,7 @@ input[type="checkbox"]:checked::after {
   display: inline-block;
   width: 8px;
   height: 8px;
-  background-color: var(--primary);
+  background-color: var(--primary-color);
   content: " ";
   border-radius: 2px;
 }
@@ -182,8 +226,8 @@ input[type="range"] {
   appearance: none;
   height: 8px;
   width: 20px;
-  background-color: var(--primary);
-  border-radius: 10px;
+  background-color: var(--primary-color);
+  border-radius: 6px;
   cursor: pointer;
   transition: all ease 0.3s;
   margin-left: 5px;
@@ -223,7 +267,7 @@ input[type="number"],
 input[type="text"],
 input[type="password"] {
   appearance: none;
-  border-radius: 10px;
+  border-radius: 6px;
   border: var(--border-in-light);
   min-height: 36px;
   box-sizing: border-box;
@@ -232,6 +276,41 @@ input[type="password"] {
   padding: 0 10px;
   max-width: 50%;
   font-family: inherit;
+}
+
+input:focus-visible {
+  outline: none;
+}
+
+input:focus,
+textarea:focus,
+select:focus {
+  z-index: 1;
+  border-color: var(--td-brand-color);
+  box-shadow: 0 0 0 2px var(--td-brand-color-focus);
+}
+
+input:hover,
+textarea:hover,
+select:hover {
+  border-color: var(--primary-color);
+}
+
+textarea,
+select {
+  display: flex;
+  width: 100%;
+  border-radius: 6px;
+  border: var(--border-in-light);
+  padding: 5px 10px;
+  background-color: var(--white);
+  resize: vertical;
+  outline: none;
+  overflow: hidden;
+  transition:
+    all cubic-bezier(0.38, 0, 0.24, 1) 0.2s,
+    height 0s;
+  box-sizing: border-box;
 }
 
 div.math {
@@ -257,7 +336,7 @@ div.math {
 
 .link {
   font-size: 12px;
-  color: var(--primary);
+  color: var(--primary-color);
   text-decoration: none;
 
   &:hover {
@@ -283,7 +362,7 @@ pre {
     background-color: var(--black);
     color: var(--white);
     border: var(--border-in-light);
-    border-radius: 10px;
+    border-radius: 6px;
     transform: translateX(10px);
     pointer-events: none;
     opacity: 0;
@@ -340,16 +419,31 @@ pre {
 }
 
 .user-avatar {
-  height: 30px;
-  min-height: 30px;
-  width: 30px;
-  min-width: 30px;
+  height: 40px;
+  min-height: 40px;
+  width: 40px;
+  min-width: 40px;
   display: flex;
   align-items: center;
   justify-content: center;
-  border: var(--border-in-light);
-  box-shadow: var(--card-shadow);
-  border-radius: 11px;
+  border-radius: 21px;
+  overflow: hidden;
+}
+
+.avatar-item {
+  display: flex;
+}
+
+.avatar-desc {
+  font-size: 12px;
+  color: var(--dark-gray);
+  padding: 0 6px;
+  background: var(--gray);
+  border-radius: 3px;
+  height: 22px;
+  line-height: 22px;
+  margin-top: 4px;
+  transform: scale(0.8);
 }
 
 .one-line {
@@ -360,4 +454,27 @@ pre {
 
 .copyable {
   user-select: text;
+}
+
+.tag {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  display: inline-flex;
+  align-items: center;
+  flex-direction: row;
+  padding: 0px 8px;
+  height: 24px;
+  border-radius: 3px;
+  border: 1px solid transparent;
+  white-space: nowrap;
+}
+
+.tag-default {
+  background-color: var(--td-bg-color-secondarycontainer);
+}
+
+.margin-right-1 {
+  margin-right: 10px;
 }

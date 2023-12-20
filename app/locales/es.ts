@@ -11,6 +11,7 @@ const es: PartialLocaleType = {
     ChatItemCount: (count: number) => `${count} mensajes`,
   },
   Chat: {
+    Name: "Chat",
     SubTitle: (count: number) => `${count} mensajes con ChatGPT`,
     Actions: {
       ChatList: "Ir a la lista de chats",
@@ -53,6 +54,8 @@ const es: PartialLocaleType = {
       "Resetting will clear the current conversation history and historical memory. Are you sure you want to reset?",
   },
   Home: {
+    Title: "ChatGPT Next",
+    Slogn: "Build your own AI assistant.",
     NewChat: "Nuevo chat",
     DeleteChat: "¿Confirmar eliminación de la conversación seleccionada?",
     DeleteToast: "Chat Deleted",

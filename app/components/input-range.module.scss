@@ -1,9 +1,11 @@
 .input-range {
   border: var(--border-in-light);
-  border-radius: 10px;
+  border-radius: 6px;
   padding: 5px 10px 5px 10px;
   font-size: 12px;
   display: flex;
+  padding: 10px;
+  background: var(--white);
   justify-content: space-between;
   max-width: 40%;
 

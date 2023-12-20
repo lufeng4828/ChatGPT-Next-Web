@@ -11,6 +11,7 @@ const jp: PartialLocaleType = {
     ChatItemCount: (count: number) => `${count} 通のチャット`,
   },
   Chat: {
+    Name: "Chat",
     SubTitle: (count: number) => `ChatGPTとの ${count} 通のチャット`,
     Actions: {
       ChatList: "メッセージリストを表示",
@@ -58,6 +59,8 @@ const jp: PartialLocaleType = {
       "リセット後、現在のチャット履歴と過去のメモリがクリアされます。リセットしてもよろしいですか？",
   },
   Home: {
+    Title: "ChatGPT Next",
+    Slogn: "Build your own AI assistant.",
     NewChat: "新しいチャット",
     DeleteChat: "選択したチャットを削除してもよろしいですか？",
     DeleteToast: "チャットが削除されました",

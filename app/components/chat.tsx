@@ -8,19 +8,11 @@ import React, {
   Fragment,
 } from "react";
 
-import SendWhiteIcon from "../icons/send-white.svg";
 import BrainIcon from "../icons/brain.svg";
-import RenameIcon from "../icons/rename.svg";
-import ExportIcon from "../icons/share.svg";
 import ReturnIcon from "../icons/return.svg";
 import CopyIcon from "../icons/copy.svg";
 import LoadingIcon from "../icons/three-dots.svg";
-import PromptIcon from "../icons/prompt.svg";
-import MaskIcon from "../icons/mask.svg";
-import MaxIcon from "../icons/max.svg";
-import MinIcon from "../icons/min.svg";
 import ResetIcon from "../icons/reload.svg";
-import BreakIcon from "../icons/break.svg";
 import SettingsIcon from "../icons/chat-settings.svg";
 import DeleteIcon from "../icons/clear.svg";
 import PinIcon from "../icons/pin.svg";
@@ -33,7 +25,6 @@ import DarkIcon from "../icons/dark.svg";
 import AutoIcon from "../icons/auto.svg";
 import BottomIcon from "../icons/bottom.svg";
 import StopIcon from "../icons/pause.svg";
-import RobotIcon from "../icons/robot.svg";
 
 import {
   ChatMessage,
@@ -329,6 +320,7 @@ function ClearContextDivider() {
 function ChatAction(props: {
   text: string;
   icon: JSX.Element;
+  isFull?: boolean;
   onClick: () => void;
 }) {
   const iconRef = useRef<HTMLDivElement>(null);
@@ -349,9 +341,17 @@ function ChatAction(props: {
     });
   }
 
+  useEffect(() => {
+    updateWidth();
+  }, [props.isFull, props.text]);
+
+  const actionClass = props.isFull
+    ? `${styles["chat-input-action"]} ${styles["full-width"]}`
+    : `${styles["chat-input-action"]}`;
+
   return (
     <div
-      className={`${styles["chat-input-action"]} clickable`}
+      className={`${actionClass} clickable`}
       onClick={() => {
         props.onClick();
         setTimeout(updateWidth, 1);
@@ -494,7 +494,7 @@ export function ChatActions(props: {
       <ChatAction
         onClick={props.showPromptHints}
         text={Locale.Chat.InputActions.Prompt}
-        icon={<PromptIcon />}
+        icon={<i className="iconfont icon-kuaijie"></i>}
       />
 
       <ChatAction
@@ -502,12 +502,12 @@ export function ChatActions(props: {
           navigate(Path.Masks);
         }}
         text={Locale.Chat.InputActions.Masks}
-        icon={<MaskIcon />}
+        icon={<i className="iconfont icon-GPTBOTS"></i>}
       />
 
       <ChatAction
         text={Locale.Chat.InputActions.Clear}
-        icon={<BreakIcon />}
+        icon={<i className="iconfont icon-qingchu"></i>}
         onClick={() => {
           chatStore.updateCurrentSession((session) => {
             if (session.clearContextIndex === session.messages.length) {
@@ -523,7 +523,8 @@ export function ChatActions(props: {
       <ChatAction
         onClick={() => setShowModelSelector(true)}
         text={currentModel}
-        icon={<RobotIcon />}
+        isFull={true}
+        icon={<i className="iconfont icon-ChatGPT"></i>}
       />
 
       {showModelSelector && (
@@ -648,7 +649,7 @@ function _Chat() {
       const rows = inputRef.current ? autoGrowTextArea(inputRef.current) : 1;
       const inputRows = Math.min(
         20,
-        Math.max(2 + Number(!isMobileScreen), rows),
+        Math.max(4 + Number(!isMobileScreen), rows),
       );
       setInputRows(inputRows);
     },
@@ -1065,10 +1066,7 @@ function _Chat() {
         )}
 
         <div className={`window-header-title ${styles["chat-body-title"]}`}>
-          <div
-            className={`window-header-main-title ${styles["chat-body-main-title"]}`}
-            onClickCapture={() => setIsEditingMessage(true)}
-          >
+          <div className={`window-header-main-title`}>
             {!session.topic ? DEFAULT_TOPIC : session.topic}
           </div>
           <div className="window-header-sub-title">
@@ -1079,16 +1077,24 @@ function _Chat() {
           {!isMobileScreen && (
             <div className="window-action-button">
               <IconButton
-                icon={<RenameIcon />}
-                bordered
+                icon={
+                  <i
+                    className="iconfont icon-bianji"
+                    style={{ fontSize: "16px" }}
+                  ></i>
+                }
                 onClick={() => setIsEditingMessage(true)}
               />
             </div>
           )}
           <div className="window-action-button">
             <IconButton
-              icon={<ExportIcon />}
-              bordered
+              icon={
+                <i
+                  className="iconfont icon-a-fenxiangdaochulianjie"
+                  style={{ fontSize: "16px" }}
+                ></i>
+              }
               title={Locale.Chat.Actions.Export}
               onClick={() => {
                 setShowExport(true);
@@ -1098,8 +1104,19 @@ function _Chat() {
           {showMaxIcon && (
             <div className="window-action-button">
               <IconButton
-                icon={config.tightBorder ? <MinIcon /> : <MaxIcon />}
-                bordered
+                icon={
+                  config.tightBorder ? (
+                    <i
+                      className="iconfont icon-quanjusuoxiao"
+                      style={{ fontSize: "14px" }}
+                    ></i>
+                  ) : (
+                    <i
+                      className="iconfont icon-bg-fullscreen"
+                      style={{ fontSize: "14px" }}
+                    ></i>
+                  )
+                }
                 onClick={() => {
                   config.update(
                     (config) => (config.tightBorder = !config.tightBorder),
@@ -1148,34 +1165,48 @@ function _Chat() {
                 <div className={styles["chat-message-container"]}>
                   <div className={styles["chat-message-header"]}>
                     <div className={styles["chat-message-avatar"]}>
-                      <div className={styles["chat-message-edit"]}>
-                        <IconButton
-                          icon={<EditIcon />}
-                          onClick={async () => {
-                            const newMessage = await showPrompt(
-                              Locale.Chat.Actions.Edit,
-                              message.content,
-                              10,
-                            );
-                            chatStore.updateCurrentSession((session) => {
-                              const m = session.mask.context
-                                .concat(session.messages)
-                                .find((m) => m.id === message.id);
-                              if (m) {
-                                m.content = newMessage;
-                              }
-                            });
-                          }}
-                        ></IconButton>
-                      </div>
                       {isUser ? (
-                        <Avatar avatar={config.avatar} />
+                        <Avatar
+                          avatar={config.avatar}
+                          showModel={true}
+                          style={{
+                            height: "30px",
+                            minHeight: "30px",
+                            width: "30px",
+                            minWidth: "30px",
+                            background: getComputedStyle(
+                              document.documentElement,
+                            ).getPropertyValue("--fourth-color"),
+                          }}
+                        />
                       ) : (
                         <>
                           {["system"].includes(message.role) ? (
-                            <Avatar avatar="2699-fe0f" />
+                            <Avatar
+                              avatar="2699-fe0f"
+                              showModel={true}
+                              style={{
+                                height: "30px",
+                                minHeight: "30px",
+                                width: "30px",
+                                minWidth: "30px",
+                                background: getComputedStyle(
+                                  document.documentElement,
+                                ).getPropertyValue("--primary-color"),
+                              }}
+                            />
                           ) : (
                             <MaskAvatar
+                              showModel={true}
+                              style={{
+                                height: "30px",
+                                minHeight: "30px",
+                                width: "30px",
+                                minWidth: "30px",
+                                background: getComputedStyle(
+                                  document.documentElement,
+                                ).getPropertyValue("--primary-color"),
+                              }}
                               avatar={session.mask.avatar}
                               model={
                                 message.model || session.mask.modelConfig.model
@@ -1197,6 +1228,25 @@ function _Chat() {
                             />
                           ) : (
                             <>
+                              <ChatAction
+                                text={Locale.Chat.Actions.Edit}
+                                icon={<EditIcon />}
+                                onClick={async () => {
+                                  const newMessage = await showPrompt(
+                                    Locale.Chat.Actions.Edit,
+                                    message.content,
+                                    10,
+                                  );
+                                  chatStore.updateCurrentSession((session) => {
+                                    const m = session.mask.context
+                                      .concat(session.messages)
+                                      .find((m) => m.id === message.id);
+                                    if (m) {
+                                      m.content = newMessage;
+                                    }
+                                  });
+                                }}
+                              />
                               <ChatAction
                                 text={Locale.Chat.Actions.Retry}
                                 icon={<ResetIcon />}
@@ -1225,11 +1275,6 @@ function _Chat() {
                       </div>
                     )}
                   </div>
-                  {showTyping && (
-                    <div className={styles["chat-message-status"]}>
-                      {Locale.Chat.Typing}
-                    </div>
-                  )}
                   <div className={styles["chat-message-item"]}>
                     <Markdown
                       content={message.content}
@@ -1264,7 +1309,6 @@ function _Chat() {
 
       <div className={styles["chat-input-panel"]}>
         <PromptHints prompts={promptHints} onPromptSelect={onPromptSelect} />
-
         <ChatActions
           showPromptModal={() => setShowPromptModal(true)}
           scrollToBottom={scrollToBottom}
@@ -1298,10 +1342,9 @@ function _Chat() {
             }}
           />
           <IconButton
-            icon={<SendWhiteIcon />}
+            icon={<i className="iconfont icon-fasong"></i>}
             text={Locale.Chat.Send}
             className={styles["chat-input-send"]}
-            type="primary"
             onClick={() => doSubmit(userInput)}
           />
         </div>

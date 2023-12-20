@@ -48,23 +48,21 @@
       }
 
       &:first-child {
-        border-top-left-radius: 10px;
-        border-top-right-radius: 10px;
+        border-top-left-radius: 6px;
+        border-top-right-radius: 6px;
       }
 
       &:last-child {
-        border-bottom-left-radius: 10px;
-        border-bottom-right-radius: 10px;
+        border-bottom-left-radius: 6px;
+        border-bottom-right-radius: 6px;
       }
 
       .mask-header {
         display: flex;
         align-items: center;
 
-        .mask-icon {
-          display: flex;
-          align-items: center;
-          justify-content: center;
+        .mask-item-avatar {
+          position: relative;
           margin-right: 10px;
         }
 
@@ -72,6 +70,7 @@
           .mask-name {
             font-size: 14px;
             font-weight: bold;
+            margin-bottom: 5px;
           }
           .mask-info {
             font-size: 12px;
@@ -83,13 +82,17 @@
         display: flex;
         flex-wrap: nowrap;
         transition: all ease 0.3s;
+        button {
+          height: 32px;
+          padding: 0 8px;
+        }
       }
 
       @media screen and (max-width: 600px) {
         display: flex;
         flex-direction: column;
         padding-bottom: 10px;
-        border-radius: 10px;
+        border-radius: 6px;
         margin-bottom: 20px;
         box-shadow: var(--card-shadow);
 

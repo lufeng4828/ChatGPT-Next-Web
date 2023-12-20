@@ -262,7 +262,13 @@ export function PasswordInput(props: HTMLProps<HTMLInputElement>) {
   return (
     <div className={"password-input-container"}>
       <IconButton
-        icon={visible ? <EyeIcon /> : <EyeOffIcon />}
+        icon={
+          visible ? (
+            <i className="iconfont icon-mima-mingwen"></i>
+          ) : (
+            <i className="iconfont icon-miwen"></i>
+          )
+        }
         onClick={changeVisibility}
         className={"password-eye"}
       />
@@ -470,7 +476,7 @@ export function Selector<T>(props: {
                     style={{
                       height: 10,
                       width: 10,
-                      backgroundColor: "var(--primary)",
+                      backgroundColor: "var(--primary-color)",
                       borderRadius: 10,
                     }}
                   ></div>

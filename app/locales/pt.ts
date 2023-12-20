@@ -23,9 +23,11 @@ const pt: PartialLocaleType = {
     ChatItemCount: (count: number) => `${count} mensagens`,
   },
   Chat: {
+    Name: "Chat",
     SubTitle: (count: number) => `${count} mensagens`,
     EditMessage: {
       Title: "Editar Todas as Mensagens",
+      Placeholder: "Introduza por favor as mensagens",
       Topic: {
         Title: "Tópico",
         SubTitle: "Mudar o tópico atual",
@@ -122,6 +124,8 @@ const pt: PartialLocaleType = {
       "Resetar irá limpar o histórico de conversa atual e a memória histórica. Você tem certeza que quer resetar?",
   },
   Home: {
+    Title: "ChatGPT Next",
+    Slogn: "Build your own AI assistant.",
     NewChat: "Novo Chat",
     DeleteChat: "Confirmar para deletar a conversa selecionada?",
     DeleteToast: "Chat Deletado",

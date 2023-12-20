@@ -11,6 +11,7 @@ const ru: PartialLocaleType = {
     ChatItemCount: (count: number) => `${count} сообщений`,
   },
   Chat: {
+    Name: "Chat",
     SubTitle: (count: number) => `${count} сообщений с ChatGPT`,
     Actions: {
       ChatList: "Перейти к списку чатов",
@@ -53,6 +54,8 @@ const ru: PartialLocaleType = {
       "При сбросе текущая история переписки и историческая память будут удалены. Вы уверены, что хотите сбросить?",
   },
   Home: {
+    Title: "ChatGPT Next",
+    Slogn: "Build your own AI assistant.",
     NewChat: "Новый чат",
     DeleteChat: "Вы действительно хотите удалить выбранный разговор?",
     DeleteToast: "Чат удален",
