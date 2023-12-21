@@ -17,6 +17,26 @@ import ko from "./ko";
 import ar from "./ar";
 import bn from "./bn";
 import { merge } from "../utils/merge";
+import moment from "moment";
+
+import "moment/locale/zh-cn"; // 简体中文
+import "moment/locale/en-gb"; // 英文
+import "moment/locale/pt"; // 葡萄牙语
+import "moment/locale/zh-tw"; // 繁体中文
+import "moment/locale/ja"; // 日语
+import "moment/locale/ko"; // 韩语
+import "moment/locale/id"; // 印尼语
+import "moment/locale/fr"; // 法语
+import "moment/locale/es"; // 西班牙语
+import "moment/locale/it"; // 意大利语
+import "moment/locale/tr"; // 土耳其语
+import "moment/locale/de"; // 德语
+import "moment/locale/vi"; // 越南语
+import "moment/locale/ru"; // 俄语
+import "moment/locale/cs"; // 捷克语
+import "moment/locale/nn"; // 挪威尼诺斯克语
+import "moment/locale/ar"; // 阿拉伯语
+import "moment/locale/bn"; // 孟加拉语
 
 import type { LocaleType } from "./cn";
 export type { LocaleType, PartialLocaleType } from "./cn";
@@ -116,6 +136,34 @@ export function getLang(): Lang {
   }
 
   return DEFAULT_LANG;
+}
+
+export const MOMENT_LANG_MAPPING = {
+  cn: "zh-cn",
+  en: "en-gb",
+  pt: "pt",
+  tw: "zh-tw",
+  jp: "ja",
+  ko: "ko",
+  id: "id",
+  fr: "fr",
+  es: "es",
+  it: "it",
+  tr: "tr",
+  de: "de",
+  vi: "vi",
+  ru: "ru",
+  cs: "cs",
+  no: "nn",
+  ar: "ar",
+  bn: "bn",
+};
+
+export function timeAgo(timeStr: string) {
+  moment.locale(MOMENT_LANG_MAPPING[getLang()]);
+  const time = moment(timeStr, "YYYY/MM/DD HH:mm:ss");
+  const timeAgo = time.fromNow();
+  return timeAgo;
 }
 
 export function changeLang(lang: Lang) {

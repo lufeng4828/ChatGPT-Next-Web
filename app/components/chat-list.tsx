@@ -19,7 +19,7 @@ import { Mask } from "../store/mask";
 import { useRef, useEffect } from "react";
 import { showConfirm } from "./ui-lib";
 import { useMobileScreen } from "../utils";
-import { Avatar } from "./emoji";
+import { timeAgo } from "../locales";
 
 export function ChatItem(props: {
   onClick?: () => void;
@@ -98,7 +98,9 @@ export function ChatItem(props: {
                     <div className={styles["chat-item-count"]}>
                       {Locale.ChatItem.ChatItemCount(props.count)}
                     </div>
-                    <div className={styles["chat-item-date"]}>{props.time}</div>
+                    <div className={styles["chat-item-date"]}>
+                      {timeAgo(props.time)}
+                    </div>
                   </div>
                 </div>
               </div>

@@ -85,7 +85,7 @@
   width: 100%;
   background: var(--white);
   position: relative;
-  border-top: 1px solid #eee;
+  border-top: 1px solid var(--gray);
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -239,7 +239,9 @@
 .sidebar-header {
   position: relative;
   padding-top: 20px;
-  padding-bottom: 20px;
+  padding-bottom: 12px;
+  border-bottom: 1px solid var(--gray);
+  margin-bottom: 10px;
 }
 
 .sidebar-toolbar {
@@ -264,6 +266,7 @@
 .sidebar-title {
   font-size: 20px;
   font-weight: bold;
+  color: var(--primary-color);
   animation: slide-in ease 0.3s;
 }
 
@@ -356,6 +359,11 @@
   text-overflow: ellipsis;
   white-space: nowrap;
   width: 80px;
+}
+
+.chat-item-date {
+  text-align: right;
+  padding-right: 5px;
 }
 
 .narrow-sidebar {
@@ -470,3 +478,4 @@
 .rtl-screen {
   direction: rtl;
 }
+
