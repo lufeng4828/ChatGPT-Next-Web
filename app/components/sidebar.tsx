@@ -176,22 +176,20 @@ export function SideBar(props: { className?: string }) {
             <div className={`${styles["sidebar-sub-title"]}`}>
               {Locale.Home.Slogn}
             </div>
-            {!isMobileScreen && (
-              <div className={styles["sidebar-toolbar"]}>
-                <IconButton
-                  icon={<AddIcon />}
-                  onClick={() => {
-                    if (config.dontShowMaskSplashScreen) {
-                      chatStore.newSession();
-                      navigate(Path.Chat);
-                    } else {
-                      startChat();
-                    }
-                  }}
-                  shadow
-                />
-              </div>
-            )}
+            <div className={`${styles["sidebar-toolbar"]} `}>
+              <IconButton
+                icon={<i className="iconfont icon-fasong"></i>}
+                onClick={() => {
+                  if (config.dontShowMaskSplashScreen) {
+                    chatStore.newSession();
+                    navigate(Path.Chat);
+                  } else {
+                    startChat();
+                  }
+                }}
+                shadow
+              />
+            </div>
           </div>
           <div
             className={styles["sidebar-body"]}

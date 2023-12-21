@@ -33,12 +33,7 @@ export function IconButton(props: {
       autoFocus={props.autoFocus}
     >
       {props.icon && (
-        <div
-          className={
-            styles["icon-button-icon"] +
-            ` ${props.type === "primary" && "no-dark"}`
-          }
-        >
+        <div className={`${styles["icon-button-icon"]} no-dark`}>
           {props.icon}
         </div>
       )}
