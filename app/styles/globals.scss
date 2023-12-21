@@ -12,7 +12,7 @@
   --gray: rgb(250, 250, 250);
   --td-bg-color-secondarycontainer: #f3f3f3;
   --primary-color: #8250df;
-  --logo-color: #8250df;
+  --logo-color: #fff;
   --second-color: #fff;
   --third-color: #f8f3fd;
   --fourth-color: #c9f3cc;
@@ -30,13 +30,13 @@
   --item-select-color: rgb(236 220 253);
   --item-hover-color: rgba(236, 220, 253, 0.4);
   --active-color: #8250df;
-  --subbar-title: #fa8f31;
+  --subbar-title: #ffffffb7;
   --subbar-bg-gradient: radial-gradient(
       circle,
-      rgb(130 81 224 / 30%) 0%,
-      rgb(248 243 253) 50%
+      rgb(130 81 224 / 20%) 0%,
+      rgb(130 81 224 / 98%) 50%
     ),
-    url(/research.svg);
+    url(/research.svg) #8250df;
 
   /* shadow */
   --shadow: 0px 3px 14px 2px rgba(0, 0, 0, 0.05),
@@ -70,16 +70,16 @@
   --hover-color: #323232;
   --bg-color-1: #fcfcfc30;
   --subbar-bg: #1e1e1e;
-  --subbar-title: #acadaf;
+  --subbar-title: #ffffffd1;
   --item-select-color: rgb(236 220 253 / 11%);
   --item-hover-color: rgb(236 220 253 / 5%);
   --active-color: #ae87f6;
   --subbar-bg-gradient: radial-gradient(
       circle,
-      rgb(0 0 0 / 25%) 0%,
-      #1e1e1e 50%
+      rgb(130 81 224 / 20%) 0%,
+      rgb(130 81 224 / 98%) 50%
     ),
-    url(/research.svg);
+    url(/research.svg) #8250df;
   --bar-color: rgba(255, 255, 255, 0.1);
   --border-in-light: 1px solid rgba(255, 255, 255, 0.192);
   --theme-color: var(--gray);

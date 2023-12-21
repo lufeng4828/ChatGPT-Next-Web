@@ -217,7 +217,7 @@
 
 .sidebar-header {
   position: relative;
-  padding: 16px 20px;
+  padding: 14px 20px;
   margin-bottom: 10px;
 }
 
@@ -244,7 +244,7 @@
 }
 
 .sidebar-bg {
-  background-image: var(--subbar-bg-gradient);
+  background: var(--subbar-bg-gradient);
   background-size: cover;
   background-repeat: no-repeat;
   background-position: 60px center;
