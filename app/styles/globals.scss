@@ -12,6 +12,7 @@
   --gray: rgb(250, 250, 250);
   --td-bg-color-secondarycontainer: #f3f3f3;
   --primary-color: #8250df;
+  --logo-color: #8250df;
   --second-color: #fff;
   --third-color: #f8f3fd;
   --fourth-color: #c9f3cc;
@@ -62,19 +63,20 @@
   --td-brand-color-focus: #c0d8ff3e;
   --dark-gray: #ccc;
   --primary-color: #8250df;
+  --logo-color: #fff;
   --second-color: rgb(27 38 42);
   --third-color: #f8f3fd;
   --fourth-color: #c9f3cc;
   --hover-color: #323232;
   --bg-color-1: #fcfcfc30;
   --subbar-bg: #1e1e1e;
-  --subbar-title: #fa8f31;
+  --subbar-title: #acadaf;
   --item-select-color: rgb(236 220 253 / 11%);
   --item-hover-color: rgb(236 220 253 / 5%);
   --active-color: #ae87f6;
   --subbar-bg-gradient: radial-gradient(
       circle,
-      rgb(0 0 0 / 65%) 0%,
+      rgb(0 0 0 / 25%) 0%,
       #1e1e1e 50%
     ),
     url(/research.svg);
