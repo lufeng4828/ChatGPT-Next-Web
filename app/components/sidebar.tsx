@@ -20,10 +20,9 @@ import {
   MIN_SIDEBAR_WIDTH,
   NARROW_SIDEBAR_WIDTH,
   Path,
-  REPO_URL,
 } from "../constant";
 
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { isIOS, useMobileScreen } from "../utils";
 import dynamic from "next/dynamic";
 import { Mask } from "../store/mask";
@@ -167,11 +166,14 @@ export function SideBar(props: { className?: string }) {
             shouldNarrow && styles["narrow-sidebar"]
           }`}
         >
-          <div className={styles["sidebar-header"]} data-tauri-drag-region>
+          <div
+            className={`${styles["sidebar-header"]}  ${styles["sidebar-bg"]}`}
+            data-tauri-drag-region
+          >
             <div className={styles["sidebar-title"]} data-tauri-drag-region>
               {Locale.Home.Title}
             </div>
-            <div className={styles["sidebar-sub-title"]}>
+            <div className={`${styles["sidebar-sub-title"]}`}>
               {Locale.Home.Slogn}
             </div>
             {isMobileScreen && (

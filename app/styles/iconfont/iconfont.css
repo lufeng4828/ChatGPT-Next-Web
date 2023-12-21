@@ -6,6 +6,15 @@
     url("iconfont.ttf?t=1703063363945") format("truetype");
 }
 
+@font-face {
+  font-family: "钉钉进步体 Regular";
+  font-weight: 400;
+  src:
+    url("NcH3HrurSXyS.woff2?t=1703063363945") format("woff2"),
+    url("CxjGYwu5T18s.woff?t=1703063363945") format("woff");
+  font-display: swap;
+}
+
 .iconfont {
   font-family: "iconfont" !important;
   font-size: 16px;

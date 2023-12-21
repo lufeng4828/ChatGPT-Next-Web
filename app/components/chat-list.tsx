@@ -29,6 +29,7 @@ export function ChatItem(props: {
   time: string;
   selected: boolean;
   id: string;
+  lastMessage: string;
   index: number;
   narrow?: boolean;
   mask: Mask;
@@ -86,7 +87,9 @@ export function ChatItem(props: {
                     style={{
                       background: getComputedStyle(
                         document.documentElement,
-                      ).getPropertyValue("--primary-color"),
+                      ).getPropertyValue(
+                        props.count > 0 ? "--primary-color" : "--gray-2",
+                      ),
                     }}
                     avatar={props.mask.avatar}
                     model={props.mask.modelConfig.model}
@@ -96,7 +99,9 @@ export function ChatItem(props: {
                   <div className={styles["chat-item-title"]}>{props.title}</div>
                   <div className={styles["chat-item-info"]}>
                     <div className={styles["chat-item-count"]}>
-                      {Locale.ChatItem.ChatItemCount(props.count)}
+                      {props.lastMessage
+                        ? props.lastMessage.slice(0, 10)
+                        : Locale.ChatItem.ChatItemCount(props.count)}
                     </div>
                     <div className={styles["chat-item-date"]}>
                       {timeAgo(props.time)}
@@ -135,7 +140,6 @@ export function ChatList(props: { narrow?: boolean }) {
   const chatStore = useChatStore();
   const navigate = useNavigate();
   const isMobileScreen = useMobileScreen();
-  console.log("sessions", sessions);
   const onDragEnd: OnDragEndResponder = (result) => {
     const { destination, source } = result;
     if (!destination) {
@@ -169,6 +173,11 @@ export function ChatList(props: { narrow?: boolean }) {
                 key={item.id}
                 id={item.id}
                 index={i}
+                lastMessage={
+                  item.messages.length > 0
+                    ? item.messages[item.messages.length - 1].content
+                    : ""
+                }
                 selected={i === selectedIndex}
                 onClick={() => {
                   navigate(Path.Chat);

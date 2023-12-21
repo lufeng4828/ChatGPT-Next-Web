@@ -1,7 +1,7 @@
 import styles from "./home.module.scss";
 
 import { IconButton } from "./button";
-import ChatGptIcon from "../icons/chatgpt.svg";
+import MagicGptIcon from "../icons/magic-gpt.svg";
 import Locale from "../locales";
 import { useAppConfig } from "../store";
 import { useLocation } from "react-router-dom";
@@ -27,7 +27,24 @@ export function SidebarNav() {
     >
       {!isMobileScreen && (
         <div className={styles["sidebar-logo"] + " no-dark"}>
-          <ChatGptIcon />
+          <div
+            className="user-avatar no-dark"
+            style={{
+              height: "45px",
+              minHeight: "45px",
+              width: "45px",
+              minWidth: "45px",
+              background: getComputedStyle(
+                document.documentElement,
+              ).getPropertyValue("--primary-color"),
+            }}
+          >
+            <MagicGptIcon
+              className={styles["icon"]}
+              width="30px"
+              height="30px"
+            />
+          </div>
         </div>
       )}
       <div className={styles["sidebar-header-bar"]}>

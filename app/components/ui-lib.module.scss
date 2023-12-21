@@ -48,7 +48,6 @@
 
     .list-item-title {
       font-size: 13px;
-      font-weight: bold;
     }
 
     .list-item-sub-title {
@@ -281,6 +280,8 @@
 
   .list {
     background: var(--white-2);
+    box-shadow: var(--shadow);
+    border: 1px solid var(--gray);
     .list-item {
       padding: 4px 8px;
     }

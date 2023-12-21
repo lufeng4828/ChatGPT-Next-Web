@@ -1283,7 +1283,6 @@ function _Chat() {
                         message.content.length === 0 &&
                         !isUser
                       }
-                      onContextMenu={(e) => onRightClick(e, message)}
                       onDoubleClickCapture={() => {
                         if (!isMobileScreen) return;
                         setUserInput(message.content);
