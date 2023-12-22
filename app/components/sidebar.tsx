@@ -3,11 +3,8 @@ import { useEffect, useRef, useMemo } from "react";
 import styles from "./home.module.scss";
 
 import { IconButton } from "./button";
-import ChatGptIcon from "../icons/chatgpt.svg";
-import AddIcon from "../icons/add.svg";
-import DeleteIcon from "../icons/delete.svg";
 import DragIcon from "../icons/drag.svg";
-
+import MagicGptIcon from "../icons/magic-gpt.svg";
 import Locale from "../locales";
 import { useLocation } from "react-router-dom";
 
@@ -170,25 +167,48 @@ export function SideBar(props: { className?: string }) {
             className={`${styles["sidebar-header"]} ${styles["sidebar-bg"]}`}
             data-tauri-drag-region
           >
-            <div className={styles["sidebar-title"]} data-tauri-drag-region>
-              {Locale.Home.Title}
-            </div>
-            <div className={`${styles["sidebar-sub-title"]}`}>
-              {Locale.Home.Slogn}
-            </div>
-            <div className={`${styles["sidebar-toolbar"]} `}>
-              <IconButton
-                icon={<i className="iconfont icon-fasong"></i>}
-                onClick={() => {
-                  if (config.dontShowMaskSplashScreen) {
-                    chatStore.newSession();
-                    navigate(Path.Chat);
-                  } else {
-                    startChat();
-                  }
-                }}
-                shadow
-              />
+            {isMobileScreen && (
+              <div className={styles["sidebar-title-left"]}>
+                <div className={styles["sidebar-logo"] + " no-dark"}>
+                  <div
+                    className={styles["user-avatar"] + " no-dark"}
+                    style={{
+                      height: "45px",
+                      minHeight: "45px",
+                      width: "45px",
+                      minWidth: "45px",
+                    }}
+                  >
+                    <MagicGptIcon
+                      className={styles["icon"]}
+                      width="30px"
+                      height="30px"
+                    />
+                  </div>
+                </div>
+              </div>
+            )}
+            <div className={styles["sidebar-title-right"]}>
+              <div className={styles["sidebar-title"]} data-tauri-drag-region>
+                {Locale.Home.Title}
+              </div>
+              <div className={`${styles["sidebar-sub-title"]}`}>
+                {Locale.Home.Slogn}
+              </div>
+              <div className={`${styles["sidebar-toolbar"]} `}>
+                <IconButton
+                  icon={<i className="iconfont icon-xinzeng"></i>}
+                  onClick={() => {
+                    if (config.dontShowMaskSplashScreen) {
+                      chatStore.newSession();
+                      navigate(Path.Chat);
+                    } else {
+                      startChat();
+                    }
+                  }}
+                  shadow
+                />
+              </div>
             </div>
           </div>
           <div

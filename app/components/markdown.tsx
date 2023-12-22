@@ -60,7 +60,7 @@ export function Mermaid(props: { code: string }) {
   );
 }
 
-export function PreCode(props: { children: any }) {
+export function PreCode(props: React.HTMLAttributes<HTMLPreElement>) {
   const ref = useRef<HTMLPreElement>(null);
   const refText = ref.current?.innerText;
   const [mermaidCode, setMermaidCode] = useState("");
@@ -83,7 +83,7 @@ export function PreCode(props: { children: any }) {
       {mermaidCode.length > 0 && (
         <Mermaid code={mermaidCode} key={mermaidCode} />
       )}
-      <pre ref={ref}>
+      <pre {...props} ref={ref}>
         <span
           className="copy-code-button"
           onClick={() => {
@@ -101,7 +101,6 @@ export function PreCode(props: { children: any }) {
 
 function escapeDollarNumber(text: string) {
   let escapedText = "";
-
   for (let i = 0; i < text.length; i += 1) {
     let char = text[i];
     const nextChar = text[i + 1] || " ";
@@ -112,7 +111,6 @@ function escapeDollarNumber(text: string) {
 
     escapedText += char;
   }
-
   return escapedText;
 }
 
@@ -121,7 +119,6 @@ function _MarkDownContent(props: { content: string }) {
     () => escapeDollarNumber(props.content),
     [props.content],
   );
-
   return (
     <ReactMarkdown
       remarkPlugins={[RemarkMath, RemarkGfm, RemarkBreaks]}
@@ -163,7 +160,6 @@ export function Markdown(
   } & React.DOMAttributes<HTMLDivElement>,
 ) {
   const mdRef = useRef<HTMLDivElement>(null);
-
   return (
     <div
       className="markdown-body"

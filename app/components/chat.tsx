@@ -9,21 +9,15 @@ import React, {
 } from "react";
 
 import BrainIcon from "../icons/brain.svg";
-import ReturnIcon from "../icons/return.svg";
 import CopyIcon from "../icons/copy.svg";
 import LoadingIcon from "../icons/three-dots.svg";
 import ResetIcon from "../icons/reload.svg";
-import SettingsIcon from "../icons/chat-settings.svg";
 import DeleteIcon from "../icons/clear.svg";
 import PinIcon from "../icons/pin.svg";
 import EditIcon from "../icons/rename.svg";
 import ConfirmIcon from "../icons/confirm.svg";
 import CancelIcon from "../icons/cancel.svg";
 
-import LightIcon from "../icons/light.svg";
-import DarkIcon from "../icons/dark.svg";
-import AutoIcon from "../icons/auto.svg";
-import BottomIcon from "../icons/bottom.svg";
 import StopIcon from "../icons/pause.svg";
 
 import {
@@ -457,21 +451,26 @@ export function ChatActions(props: {
         <ChatAction
           onClick={stopAll}
           text={Locale.Chat.InputActions.Stop}
-          icon={<StopIcon />}
+          icon={<i className="iconfont icon-stop"></i>}
         />
       )}
       {!props.hitBottom && (
         <ChatAction
           onClick={props.scrollToBottom}
           text={Locale.Chat.InputActions.ToBottom}
-          icon={<BottomIcon />}
+          icon={<i className="iconfont icon-scroll_down"></i>}
         />
       )}
       {props.hitBottom && (
         <ChatAction
           onClick={props.showPromptModal}
           text={Locale.Chat.InputActions.Settings}
-          icon={<SettingsIcon />}
+          icon={
+            <i
+              className="iconfont icon-shezhi1"
+              style={{ fontSize: "13px" }}
+            ></i>
+          }
         />
       )}
 
@@ -481,11 +480,11 @@ export function ChatActions(props: {
         icon={
           <>
             {theme === Theme.Auto ? (
-              <AutoIcon />
+              <i className="iconfont icon-zidong1"></i>
             ) : theme === Theme.Light ? (
-              <LightIcon />
+              <i className="iconfont icon-taiyang"></i>
             ) : theme === Theme.Dark ? (
-              <DarkIcon />
+              <i className="iconfont icon-yueliang"></i>
             ) : null}
           </>
         }
@@ -524,7 +523,9 @@ export function ChatActions(props: {
         onClick={() => setShowModelSelector(true)}
         text={currentModel}
         isFull={true}
-        icon={<i className="iconfont icon-ChatGPT"></i>}
+        icon={
+          <i className="iconfont icon-ChatGPT" style={{ fontSize: "14px" }}></i>
+        }
       />
 
       {showModelSelector && (
@@ -1056,7 +1057,7 @@ function _Chat() {
           <div className="window-actions">
             <div className={"window-action-button"}>
               <IconButton
-                icon={<ReturnIcon />}
+                icon={<i className="iconfont icon-fanhui"></i>}
                 bordered
                 title={Locale.Chat.Actions.ChatList}
                 onClick={() => navigate(Path.Home)}
@@ -1223,14 +1224,14 @@ function _Chat() {
                           {message.streaming ? (
                             <ChatAction
                               text={Locale.Chat.Actions.Stop}
-                              icon={<StopIcon />}
+                              icon={<i className="iconfont icon-stop"></i>}
                               onClick={() => onUserStop(message.id ?? i)}
                             />
                           ) : (
                             <>
                               <ChatAction
                                 text={Locale.Chat.Actions.Edit}
-                                icon={<EditIcon />}
+                                icon={<i className="iconfont icon-bianji"></i>}
                                 onClick={async () => {
                                   const newMessage = await showPrompt(
                                     Locale.Chat.Actions.Edit,
@@ -1249,24 +1250,26 @@ function _Chat() {
                               />
                               <ChatAction
                                 text={Locale.Chat.Actions.Retry}
-                                icon={<ResetIcon />}
+                                icon={
+                                  <i className="iconfont icon-zhongshi"></i>
+                                }
                                 onClick={() => onResend(message)}
                               />
 
                               <ChatAction
                                 text={Locale.Chat.Actions.Delete}
-                                icon={<DeleteIcon />}
+                                icon={<i className="iconfont icon-delete"></i>}
                                 onClick={() => onDelete(message.id ?? i)}
                               />
 
                               <ChatAction
                                 text={Locale.Chat.Actions.Pin}
-                                icon={<PinIcon />}
+                                icon={<i className="iconfont icon-guding"></i>}
                                 onClick={() => onPinMessage(message)}
                               />
                               <ChatAction
                                 text={Locale.Chat.Actions.Copy}
-                                icon={<CopyIcon />}
+                                icon={<i className="iconfont icon-fuzhi"></i>}
                                 onClick={() => copyToClipboard(message.content)}
                               />
                             </>

@@ -17,6 +17,7 @@
     align-items: center;
     box-sizing: border-box;
     animation: slide-in-from-top ease 0.3s;
+    border-bottom: var(--border-in-light);
   }
 
   .mask-cards {
@@ -24,6 +25,18 @@
     margin-top: 5vh;
     margin-bottom: 20px;
     animation: slide-in ease 0.3s;
+
+    .mask-card:nth-child(1) {
+      background: var(--mask-card-color-1);
+    }
+
+    .mask-card:nth-child(2) {
+      background: var(--mask-card-color-2);
+    }
+
+    .mask-card:nth-child(3) {
+      background: var(--mask-card-color-3);
+    }
 
     .mask-card {
       padding: 20px 10px;

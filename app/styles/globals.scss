@@ -18,7 +18,7 @@
   --fourth-color: #c9f3cc;
   --chat-text-bg: #eee;
   --gray: #eee;
-  --gray-2: #ccc;
+  --gray-2: rgb(127 125 125);
   --td-brand-color: #8250df;
   --td-brand-color-focus: #c0d8ff;
   --dark-gray: #8a8d90;
@@ -26,11 +26,14 @@
   --hover-color: #f3f3f3;
   --bar-color: rgba(0, 0, 0, 0.1);
   --theme-color: var(--gray);
-  --subbar-bg: #f8f3fc;
+  --subbar-bg: #eeeeee38;
   --item-select-color: rgb(236 220 253);
   --item-hover-color: rgba(236, 220, 253, 0.4);
   --active-color: #8250df;
   --subbar-title: #ffffffb7;
+  --mask-card-color-1: #8250df;
+  --mask-card-color-2: #5f9ea0;
+  --mask-card-color-3: #22b8cf;
   --subbar-bg-gradient: radial-gradient(
       circle,
       rgb(130 81 224 / 20%) 0%,
@@ -55,7 +58,7 @@
   --white: #1e1e1e;
   --black: #f5f5f5;
   --gray: #eeeeee14;
-  --gray-2: #393939;
+  --gray-2: rgb(127 125 125);
   --white-2: #393939;
   --white-3: #2f2f2f;
   --td-brand-color: #8250df;
@@ -74,6 +77,9 @@
   --item-select-color: rgb(236 220 253 / 11%);
   --item-hover-color: rgb(236 220 253 / 5%);
   --active-color: #ae87f6;
+  --mask-card-color-1: #8250df;
+  --mask-card-color-2: #5f9ea0;
+  --mask-card-color-3: #22b8cf;
   --subbar-bg-gradient: radial-gradient(
       circle,
       rgb(130 81 224 / 20%) 0%,
@@ -494,4 +500,11 @@ pre {
 
 .margin-right-1 {
   margin-right: 10px;
+}
+
+.katex {
+  font:
+    normal 1em KaTeX_Main,
+    Times New Roman,
+    serif;
 }

@@ -656,6 +656,15 @@ export function Settings() {
   return (
     <ErrorBoundary>
       <div className="window-header" data-tauri-drag-region>
+        <div className="window-actions">
+          <div className={"window-action-button"}>
+            <IconButton
+              icon={<i className="iconfont icon-fanhui"></i>}
+              onClick={() => navigate(Path.Home)}
+            ></IconButton>
+          </div>
+        </div>
+
         <div className="window-header-title">
           <div className="window-header-main-title">
             {Locale.Settings.Title}
@@ -669,7 +678,7 @@ export function Settings() {
           <div className="window-action-button"></div>
           <div className="window-action-button">
             <IconButton
-              icon={<CloseIcon />}
+              icon={<i className="iconfont icon-delete"></i>}
               onClick={() => navigate(Path.Home)}
               bordered
             />

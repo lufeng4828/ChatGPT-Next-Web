@@ -1,18 +1,9 @@
 @font-face {
   font-family: "iconfont"; /* Project id 4379153 */
   src:
-    url("iconfont.woff2?t=1703063363945") format("woff2"),
-    url("iconfont.woff?t=1703063363945") format("woff"),
-    url("iconfont.ttf?t=1703063363945") format("truetype");
-}
-
-@font-face {
-  font-family: "钉钉进步体 Regular";
-  font-weight: 400;
-  src:
-    url("NcH3HrurSXyS.woff2?t=1703063363945") format("woff2"),
-    url("CxjGYwu5T18s.woff?t=1703063363945") format("woff");
-  font-display: swap;
+    url("iconfont.woff2?t=1703225847657") format("woff2"),
+    url("iconfont.woff?t=1703225847657") format("woff"),
+    url("iconfont.ttf?t=1703225847657") format("truetype");
 }
 
 .iconfont {
@@ -21,6 +12,46 @@
   font-style: normal;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+}
+
+.icon-delete:before {
+  content: "\e620";
+}
+
+.icon-fuzhi:before {
+  content: "\e60c";
+}
+
+.icon-guding:before {
+  content: "\e618";
+}
+
+.icon-zhongshi:before {
+  content: "\e6f9";
+}
+
+.icon-stop:before {
+  content: "\e885";
+}
+
+.icon-scroll_down:before {
+  content: "\e658";
+}
+
+.icon-zidong1:before {
+  content: "\e604";
+}
+
+.icon-yueliang:before {
+  content: "\e63e";
+}
+
+.icon-taiyang:before {
+  content: "\e6a0";
+}
+
+.icon-fanhui:before {
+  content: "\e6e9";
 }
 
 .icon-31quanbushangpin:before {

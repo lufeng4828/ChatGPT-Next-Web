@@ -281,7 +281,7 @@ function ContextPromptItem(props: {
       />
       {!focusingInput && (
         <IconButton
-          icon={<i className="iconfont icon-shanchu"></i>}
+          icon={<i className="iconfont icon-delete"></i>}
           className={chatStyle["context-delete-button"]}
           onClick={() => props.remove()}
           bordered
@@ -575,7 +575,7 @@ export function MaskPage() {
                   )}
                   {!m.builtin && (
                     <IconButton
-                      icon={<i className="iconfont icon-shanchu1"></i>}
+                      icon={<i className="iconfont icon-delete1"></i>}
                       text={Locale.Mask.Item.Delete}
                       onClick={async () => {
                         if (await showConfirm(Locale.Mask.Item.DeleteConfirm)) {

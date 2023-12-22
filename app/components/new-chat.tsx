@@ -116,7 +116,7 @@ export function NewChat() {
     <div className={styles["new-chat"]}>
       <div className={styles["mask-header"]}>
         <IconButton
-          icon={<LeftIcon />}
+          icon={<i className="iconfont icon-fanhui"></i>}
           text={Locale.NewChat.Return}
           onClick={() => navigate(Path.Home)}
         ></IconButton>
