@@ -54,7 +54,7 @@ const it: PartialLocaleType = {
       "Ripristinare cancellerà la conversazione corrente e la cronologia di memoria. Sei sicuro che vuoi riavviare?",
   },
   Home: {
-    Title: "ChatGPT Next",
+    Title: "ChatGPT Plus",
     Slogn: "Build your own AI assistant.",
     NewChat: "Nuova Chat",
     DeleteChat: "Confermare la cancellazione della conversazione selezionata?",

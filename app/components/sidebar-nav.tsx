@@ -3,12 +3,13 @@ import styles from "./home.module.scss";
 import { IconButton } from "./button";
 import MagicGptIcon from "../icons/magic-gpt.svg";
 import Locale from "../locales";
-import { useAppConfig } from "../store";
+import { useAppConfig, useChatStore } from "../store";
 import { useLocation } from "react-router-dom";
 import { Path, REPO_URL } from "../constant";
 import { showToast } from "./ui-lib";
 import { useNavigate } from "react-router-dom";
 import { useMobileScreen } from "../utils";
+import { Mask } from "../store/mask";
 
 export function SidebarNav() {
   const config = useAppConfig();
@@ -19,6 +20,14 @@ export function SidebarNav() {
   const isNewChat =
     location.pathname === Path.NewChat || location.pathname == Path.Masks;
   const navigate = useNavigate();
+  const chatStore = useChatStore();
+  const startChat = (mask?: Mask) => {
+    setTimeout(() => {
+      chatStore.newSession(mask);
+      navigate(Path.Chat);
+    }, 10);
+  };
+
   return (
     <div
       className={`${
@@ -88,6 +97,33 @@ export function SidebarNav() {
           }}
           shadow
         />
+        {isMobileScreen && (
+          <div
+            className="user-avatar no-dark"
+            style={{
+              height: "45px",
+              minHeight: "45px",
+              width: "45px",
+              minWidth: "45px",
+              background: getComputedStyle(
+                document.documentElement,
+              ).getPropertyValue("--primary-color"),
+            }}
+          >
+            <i
+              onClick={() => {
+                if (config.dontShowMaskSplashScreen) {
+                  chatStore.newSession();
+                  navigate(Path.Chat);
+                } else {
+                  startChat();
+                }
+              }}
+              className="iconfont icon-xinzeng"
+              style={{ fontSize: "24px", color: "#fff" }}
+            ></i>
+          </div>
+        )}
         <IconButton
           icon={
             <i
@@ -100,7 +136,7 @@ export function SidebarNav() {
           onClick={() => showToast(Locale.WIP)}
           shadow
         />
-        {isMobileScreen && (
+        {!isMobileScreen && (
           <IconButton
             className={styles["sidebar-bar-button"]}
             onClick={() => {

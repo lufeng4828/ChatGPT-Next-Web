@@ -54,7 +54,7 @@ const cs: PartialLocaleType = {
       "Resetováním se vymaže historie aktuálních konverzací i paměť historie pokynů. Opravdu chcete provést obnovu?",
   },
   Home: {
-    Title: "ChatGPT Next",
+    Title: "ChatGPT Plus",
     Slogn: "Build your own AI assistant.",
     NewChat: "Nový chat",
     DeleteChat: "Potvrzujete smazání vybrané konverzace?",

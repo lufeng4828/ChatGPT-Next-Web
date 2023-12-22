@@ -124,7 +124,7 @@ const en: LocaleType = {
       "Resetting will clear the current conversation history and historical memory. Are you sure you want to reset?",
   },
   Home: {
-    Title: "ChatGPT Next",
+    Title: "ChatGPT Plus",
     Slogn: "Build your own AI assistant.",
     NewChat: "New Chat",
     DeleteChat: "Confirm to delete the selected conversation?",

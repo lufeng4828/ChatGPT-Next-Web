@@ -3,13 +3,8 @@ import { ErrorBoundary } from "./error";
 
 import styles from "./mask.module.scss";
 
-import DownloadIcon from "../icons/download.svg";
-import UploadIcon from "../icons/upload.svg";
-import EditIcon from "../icons/edit.svg";
 import AddIcon from "../icons/add.svg";
 import CloseIcon from "../icons/close.svg";
-import DeleteIcon from "../icons/delete.svg";
-import EyeIcon from "../icons/eye.svg";
 import CopyIcon from "../icons/copy.svg";
 import DragIcon from "../icons/drag.svg";
 
@@ -284,7 +279,6 @@ function ContextPromptItem(props: {
           icon={<i className="iconfont icon-delete"></i>}
           className={chatStyle["context-delete-button"]}
           onClick={() => props.remove()}
-          bordered
         />
       )}
     </div>
@@ -359,9 +353,8 @@ export function ContextPrompts(props: {
         </DragDropContext>
         <div className={chatStyle["context-prompt-row"]}>
           <IconButton
-            icon={<i className="iconfont icon-a-ziliaocaozuoxinzeng"></i>}
+            icon={<i className="iconfont icon-xinzeng"></i>}
             text={Locale.Context.Add}
-            bordered
             className={chatStyle["context-prompt-button"]}
             onClick={() =>
               addContextPrompt(
@@ -455,23 +448,17 @@ export function MaskPage() {
             <div className="window-action-button">
               <IconButton
                 icon={<i className="iconfont icon-daochu1"></i>}
-                bordered
                 onClick={downloadAll}
               />
             </div>
             <div className="window-action-button">
               <IconButton
                 icon={<i className="iconfont icon-daoru1"></i>}
-                bordered
                 onClick={() => importFromFile()}
               />
             </div>
             <div className="window-action-button">
-              <IconButton
-                icon={<CloseIcon />}
-                bordered
-                onClick={() => navigate(-1)}
-              />
+              <IconButton icon={<CloseIcon />} onClick={() => navigate(-1)} />
             </div>
           </div>
         </div>
@@ -508,10 +495,10 @@ export function MaskPage() {
             </Select>
 
             <IconButton
+              type="default"
               className={styles["mask-create"]}
-              icon={<AddIcon />}
+              icon={<i className="iconfont icon-xinzeng"></i>}
               text={Locale.Mask.Page.Create}
-              bordered
               onClick={() => {
                 const createdMask = maskStore.create();
                 setEditingMaskId(createdMask.id);
@@ -598,10 +585,10 @@ export function MaskPage() {
             onClose={closeMaskModal}
             actions={[
               <IconButton
+                type="default"
                 icon={<i className="iconfont icon-yunduanxiazai"></i>}
                 text={Locale.Mask.EditModal.Download}
                 key="export"
-                bordered
                 onClick={() =>
                   downloadAs(
                     JSON.stringify(editingMask),
@@ -611,8 +598,8 @@ export function MaskPage() {
               />,
               <IconButton
                 key="copy"
-                icon={<CopyIcon />}
-                bordered
+                type="primary"
+                icon={<i className="iconfont icon-fuzhi"></i>}
                 text={Locale.Mask.EditModal.Clone}
                 onClick={() => {
                   navigate(Path.Masks);

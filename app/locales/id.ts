@@ -108,7 +108,7 @@ const id: PartialLocaleType = {
       "Jika Anda mereset, riwayat obrolan saat ini dan memori historis akan dihapus. Apakah Anda yakin ingin melakukan reset?",
   },
   Home: {
-    Title: "ChatGPT Next",
+    Title: "ChatGPT Plus",
     Slogn: "Build your own AI assistant.",
     NewChat: "Obrolan Baru",
     DeleteChat: "Anda yakin ingin menghapus percakapan yang dipilih?",

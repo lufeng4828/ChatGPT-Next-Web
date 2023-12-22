@@ -54,7 +54,7 @@ const tr: PartialLocaleType = {
       "Sıfırlama, geçerli görüşme geçmişini ve geçmiş belleği siler. Sıfırlamak istediğinizden emin misiniz?",
   },
   Home: {
-    Title: "ChatGPT Next",
+    Title: "ChatGPT Plus",
     Slogn: "Build your own AI assistant.",
     NewChat: "Yeni Sohbet",
     DeleteChat: "Seçili sohbeti silmeyi onaylıyor musunuz?",

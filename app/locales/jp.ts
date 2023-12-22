@@ -59,7 +59,7 @@ const jp: PartialLocaleType = {
       "リセット後、現在のチャット履歴と過去のメモリがクリアされます。リセットしてもよろしいですか？",
   },
   Home: {
-    Title: "ChatGPT Next",
+    Title: "ChatGPT Plus",
     Slogn: "Build your own AI assistant.",
     NewChat: "新しいチャット",
     DeleteChat: "選択したチャットを削除してもよろしいですか？",

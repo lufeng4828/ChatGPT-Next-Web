@@ -54,7 +54,7 @@ const de: PartialLocaleType = {
       "Das Zurücksetzen löscht den aktuellen Gesprächsverlauf und das Langzeit-Gedächtnis. Möchten Sie wirklich zurücksetzen?",
   },
   Home: {
-    Title: "ChatGPT Next",
+    Title: "ChatGPT Plus",
     Slogn: "Build your own AI assistant.",
     NewChat: "Neuer Chat",
     DeleteChat: "Bestätigen Sie, um das ausgewählte Gespräch zu löschen?",

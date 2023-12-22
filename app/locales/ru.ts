@@ -54,7 +54,7 @@ const ru: PartialLocaleType = {
       "При сбросе текущая история переписки и историческая память будут удалены. Вы уверены, что хотите сбросить?",
   },
   Home: {
-    Title: "ChatGPT Next",
+    Title: "ChatGPT Plus",
     Slogn: "Build your own AI assistant.",
     NewChat: "Новый чат",
     DeleteChat: "Вы действительно хотите удалить выбранный разговор?",

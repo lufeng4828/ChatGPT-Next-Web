@@ -54,7 +54,7 @@ const vi: PartialLocaleType = {
       "Đặt lại sẽ xóa toàn bộ lịch sử trò chuyện hiện tại và bộ nhớ. Bạn có chắc chắn muốn đặt lại không?",
   },
   Home: {
-    Title: "ChatGPT Next",
+    Title: "ChatGPT Plus",
     Slogn: "Build your own AI assistant.",
     NewChat: "Cuộc trò chuyện mới",
     DeleteChat: "Xác nhận xóa các cuộc trò chuyện đã chọn?",

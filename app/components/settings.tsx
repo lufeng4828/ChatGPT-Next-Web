@@ -3,16 +3,7 @@ import { useState, useEffect, useMemo } from "react";
 import styles from "./settings.module.scss";
 
 import ResetIcon from "../icons/reload.svg";
-import AddIcon from "../icons/add.svg";
-import CloseIcon from "../icons/close.svg";
-import CopyIcon from "../icons/copy.svg";
-import ClearIcon from "../icons/clear.svg";
 import LoadingIcon from "../icons/three-dots.svg";
-import EditIcon from "../icons/edit.svg";
-import EyeIcon from "../icons/eye.svg";
-import DownloadIcon from "../icons/download.svg";
-import UploadIcon from "../icons/upload.svg";
-import ConfigIcon from "../icons/config.svg";
 import ConfirmIcon from "../icons/confirm.svg";
 
 import ConnectionIcon from "../icons/connection.svg";
@@ -83,9 +74,9 @@ function EditPromptModal(props: { id: string; onClose: () => void }) {
         actions={[
           <IconButton
             key=""
+            type="primary"
             onClick={props.onClose}
             text={Locale.UI.Confirm}
-            bordered
           />,
         ]}
       >
@@ -157,8 +148,8 @@ function UserPromptModal(props: { onClose?: () => void }) {
               });
               setEditingPromptId(promptId);
             }}
-            icon={<AddIcon />}
-            bordered
+            type="primary"
+            icon={<i className="iconfont icon-xinzeng"></i>}
             text={Locale.Settings.Prompt.Modal.Add}
           />,
         ]}
@@ -185,26 +176,26 @@ function UserPromptModal(props: { onClose?: () => void }) {
                 <div className={styles["user-prompt-buttons"]}>
                   {v.isUser && (
                     <IconButton
-                      icon={<ClearIcon />}
+                      icon={<i className="iconfont icon-delete"></i>}
                       className={styles["user-prompt-button"]}
                       onClick={() => promptStore.remove(v.id!)}
                     />
                   )}
                   {v.isUser ? (
                     <IconButton
-                      icon={<EditIcon />}
+                      icon={<i className="iconfont icon-bianji"></i>}
                       className={styles["user-prompt-button"]}
                       onClick={() => setEditingPromptId(v.id)}
                     />
                   ) : (
                     <IconButton
-                      icon={<EyeIcon />}
+                      icon={<i className="iconfont icon-mima-mingwen"></i>}
                       className={styles["user-prompt-button"]}
                       onClick={() => setEditingPromptId(v.id)}
                     />
                   )}
                   <IconButton
-                    icon={<CopyIcon />}
+                    icon={<i className="iconfont icon-fuzhi"></i>}
                     className={styles["user-prompt-button"]}
                     onClick={() => copyToClipboard(v.content)}
                   />
@@ -285,7 +276,6 @@ function CheckButton() {
   return (
     <IconButton
       text={Locale.Settings.Sync.Config.Modal.Check}
-      bordered
       onClick={check}
       icon={
         checkState === "none" ? (
@@ -316,9 +306,9 @@ function SyncConfigModal(props: { onClose?: () => void }) {
           <CheckButton key="check" />,
           <IconButton
             key="confirm"
+            type="primary"
             onClick={props.onClose}
             icon={<ConfirmIcon />}
-            bordered
             text={Locale.UI.Confirm}
           />,
         ]}
@@ -680,7 +670,6 @@ export function Settings() {
             <IconButton
               icon={<i className="iconfont icon-delete"></i>}
               onClick={() => navigate(Path.Home)}
-              bordered
             />
           </div>
         </div>

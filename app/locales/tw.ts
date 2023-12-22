@@ -52,7 +52,7 @@ const tw: PartialLocaleType = {
     ResetConfirm: "重設後將清除目前對話記錄以及歷史記憶，確認重設？",
   },
   Home: {
-    Title: "ChatGPT Next",
+    Title: "ChatGPT Plus",
     Slogn: "Build your own AI assistant.",
     NewChat: "新的對話",
     DeleteChat: "確定要刪除選取的對話嗎？",

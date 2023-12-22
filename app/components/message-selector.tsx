@@ -157,13 +157,13 @@ export function MessageSelector(props: {
         <div className={styles["actions"]}>
           <IconButton
             text={Locale.Select.All}
-            bordered
+            type="default"
             className={styles["filter-item"]}
             onClick={selectAll}
           />
           <IconButton
             text={Locale.Select.Latest}
-            bordered
+            type="default"
             className={styles["filter-item"]}
             onClick={() =>
               props.updateSelection((selection) => {
@@ -175,8 +175,8 @@ export function MessageSelector(props: {
             }
           />
           <IconButton
+            type="danger"
             text={Locale.Select.Clear}
-            bordered
             className={styles["filter-item"]}
             onClick={() =>
               props.updateSelection((selection) => selection.clear())

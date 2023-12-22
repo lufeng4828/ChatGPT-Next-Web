@@ -20,7 +20,6 @@ import ChatGptIcon from "../icons/chatgpt.png";
 import ShareIcon from "../icons/share.svg";
 import BotIcon from "../icons/bot.png";
 
-import DownloadIcon from "../icons/download.svg";
 import { useEffect, useMemo, useRef, useState } from "react";
 import { MessageSelector, useMessageSelector } from "./message-selector";
 import { Avatar } from "./emoji";
@@ -357,23 +356,20 @@ export function PreviewActions(props: {
         {props.showCopy && (
           <IconButton
             text={Locale.Export.Copy}
-            bordered
-            shadow
-            icon={<CopyIcon />}
+            type="default"
+            icon={<i className="iconfont icon-fuzhi"></i>}
             onClick={props.copy}
           ></IconButton>
         )}
         <IconButton
           text={Locale.Export.Download}
-          bordered
-          shadow
+          type="default"
           icon={<i className="iconfont icon-yunduanxiazai"></i>}
           onClick={props.download}
         ></IconButton>
         <IconButton
           text={Locale.Export.Share}
-          bordered
-          shadow
+          type="default"
           icon={loading ? <LoadingIcon /> : <ShareIcon />}
           onClick={share}
         ></IconButton>

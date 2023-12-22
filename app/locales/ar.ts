@@ -94,7 +94,7 @@ const ar: PartialLocaleType = {
       "سيؤدي إعادة التعيين إلى مسح سجل المحادثة الحالي والذاكرة التاريخية. هل أنت متأكد أنك تريد الاستمرار؟",
   },
   Home: {
-    Title: "ChatGPT Next",
+    Title: "ChatGPT Plus",
     Slogn: "Build your own AI assistant.",
     NewChat: "دردشة جديدة",
     DeleteChat: "هل تريد تأكيد حذف المحادثة المحددة؟",

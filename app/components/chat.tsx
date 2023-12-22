@@ -1,24 +1,10 @@
 import { useDebouncedCallback } from "use-debounce";
-import React, {
-  useState,
-  useRef,
-  useEffect,
-  useMemo,
-  useCallback,
-  Fragment,
-} from "react";
+import React, { useState, useRef, useEffect, useMemo, Fragment } from "react";
 
 import BrainIcon from "../icons/brain.svg";
-import CopyIcon from "../icons/copy.svg";
 import LoadingIcon from "../icons/three-dots.svg";
-import ResetIcon from "../icons/reload.svg";
-import DeleteIcon from "../icons/clear.svg";
-import PinIcon from "../icons/pin.svg";
-import EditIcon from "../icons/rename.svg";
 import ConfirmIcon from "../icons/confirm.svg";
 import CancelIcon from "../icons/cancel.svg";
-
-import StopIcon from "../icons/pause.svg";
 
 import {
   ChatMessage,
@@ -93,8 +79,8 @@ export function SessionConfigModel(props: { onClose: () => void }) {
         actions={[
           <IconButton
             key="reset"
-            icon={<ResetIcon />}
-            bordered
+            icon={<i className="iconfont icon-delete"></i>}
+            type="danger"
             text={Locale.Chat.Config.Reset}
             onClick={async () => {
               if (await showConfirm(Locale.Memory.ResetConfirm)) {
@@ -106,8 +92,8 @@ export function SessionConfigModel(props: { onClose: () => void }) {
           />,
           <IconButton
             key="copy"
-            icon={<CopyIcon />}
-            bordered
+            icon={<i className="iconfont icon-fuzhi"></i>}
+            type="primary"
             text={Locale.Chat.Config.SaveAs}
             onClick={() => {
               navigate(Path.Masks);
@@ -562,6 +548,7 @@ export function EditMessageModal(props: { onClose: () => void }) {
         onClose={props.onClose}
         actions={[
           <IconButton
+            type="default"
             text={Locale.UI.Cancel}
             icon={<CancelIcon />}
             key="cancel"
@@ -1058,7 +1045,6 @@ function _Chat() {
             <div className={"window-action-button"}>
               <IconButton
                 icon={<i className="iconfont icon-fanhui"></i>}
-                bordered
                 title={Locale.Chat.Actions.ChatList}
                 onClick={() => navigate(Path.Home)}
               />

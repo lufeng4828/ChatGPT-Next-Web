@@ -121,8 +121,8 @@ const cn = {
     ResetConfirm: "确认清空历史摘要？",
   },
   Home: {
-    Title: "ChatGPT Next",
-    Slogn: "Build your own AI assistant.",
+    Title: "ChatGPT Plus",
+    Slogn: "人人都有自己的AI助手",
     NewChat: "新的聊天",
     DeleteChat: "确认删除选中的对话？",
     DeleteToast: "已删除会话",

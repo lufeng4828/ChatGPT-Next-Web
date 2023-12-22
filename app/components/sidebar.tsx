@@ -196,18 +196,34 @@ export function SideBar(props: { className?: string }) {
                 {Locale.Home.Slogn}
               </div>
               <div className={`${styles["sidebar-toolbar"]} `}>
-                <IconButton
-                  icon={<i className="iconfont icon-xinzeng"></i>}
-                  onClick={() => {
-                    if (config.dontShowMaskSplashScreen) {
-                      chatStore.newSession();
-                      navigate(Path.Chat);
-                    } else {
-                      startChat();
+                {isMobileScreen && (
+                  <IconButton
+                    className={styles["sidebar-bar-button"]}
+                    onClick={() => {
+                      navigate(Path.Settings, { state: { fromHome: true } });
+                    }}
+                    icon={
+                      <i
+                        className="iconfont icon-shezhi1"
+                        style={{ fontSize: "14px" }}
+                      ></i>
                     }
-                  }}
-                  shadow
-                />
+                    shadow
+                  />
+                )}
+                {!isMobileScreen && (
+                  <IconButton
+                    icon={<i className="iconfont icon-xinzeng"></i>}
+                    onClick={() => {
+                      if (config.dontShowMaskSplashScreen) {
+                        chatStore.newSession();
+                        navigate(Path.Chat);
+                      } else {
+                        startChat();
+                      }
+                    }}
+                  />
+                )}
               </div>
             </div>
           </div>

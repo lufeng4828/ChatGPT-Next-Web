@@ -323,7 +323,6 @@ export function showConfirm(content: any) {
             }}
             icon={<CancelIcon />}
             tabIndex={0}
-            bordered
             shadow
           ></IconButton>,
           <IconButton
@@ -337,7 +336,6 @@ export function showConfirm(content: any) {
             icon={<ConfirmIcon />}
             tabIndex={0}
             autoFocus
-            bordered
             shadow
           ></IconButton>,
         ]}
@@ -396,7 +394,6 @@ export function showPrompt(content: any, value = "", rows = 3) {
               closeModal();
             }}
             icon={<CancelIcon />}
-            bordered
             shadow
             tabIndex={0}
           ></IconButton>,
@@ -409,7 +406,6 @@ export function showPrompt(content: any, value = "", rows = 3) {
               closeModal();
             }}
             icon={<ConfirmIcon />}
-            bordered
             shadow
             tabIndex={0}
           ></IconButton>,

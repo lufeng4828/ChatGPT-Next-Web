@@ -55,7 +55,7 @@ const ko: PartialLocaleType = {
       "재설정하면 현재 대화 기록과 기억력이 삭제됩니다. 정말 재설정하시겠습니까?",
   },
   Home: {
-    Title: "ChatGPT Next",
+    Title: "ChatGPT Plus",
     Slogn: "Build your own AI assistant.",
     NewChat: "새로운 채팅",
     DeleteChat: "선택한 대화를 삭제하시겠습니까?",

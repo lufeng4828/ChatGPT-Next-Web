@@ -79,7 +79,7 @@ const fr: PartialLocaleType = {
       "La réinitialisation supprimera l'historique de la conversation actuelle ainsi que la mémoire de l'historique. Êtes-vous sûr de vouloir procéder à la réinitialisation?",
   },
   Home: {
-    Title: "ChatGPT Next",
+    Title: "ChatGPT Plus",
     Slogn: "Build your own AI assistant.",
     NewChat: "Nouvelle discussion",
     DeleteChat: "Confirmer la suppression de la conversation sélectionnée ?",

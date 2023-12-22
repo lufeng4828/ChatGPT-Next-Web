@@ -45,10 +45,17 @@
     div {
       background: var(--gray);
       border-radius: 20px;
+      width: 32px;
+      height: 32px;
     }
   }
 }
 
 .window-action-button:not(:first-child) {
   margin-left: 10px;
+}
+
+@font-face {
+  font-family: "TTTGBMedium";
+  src: url("iconfont/CxjGYwu5T19s.ttf") format("truetype");
 }

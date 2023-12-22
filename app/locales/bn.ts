@@ -105,7 +105,7 @@ const bn: PartialLocaleType = {
       "রিসেট করলে বর্তমান চ্যাট ইতিহাস এবং ঐতিহাসিক মেমোরি মুছে যাবে। পুনরায় নির্দিষ্ট করতে চান তা নিশ্চিত করতে চান?",
   },
   Home: {
-    Title: "ChatGPT Next",
+    Title: "ChatGPT Plus",
     Slogn: "Build your own AI assistant.",
     NewChat: "নতুন চ্যাট",
     DeleteChat: "নির্বাচিত সংলাপটি মুছতে নিশ্চিত করুন?",
