@@ -97,7 +97,6 @@ export class ChatGPTApi implements LLMApi {
     const shouldStream = !!options.config.stream;
     const controller = new AbortController();
     options.onController?.(controller);
-
     try {
       const chatPath = this.path(OpenaiPath.ChatPath);
       const chatPayload = {
@@ -106,7 +105,6 @@ export class ChatGPTApi implements LLMApi {
         signal: controller.signal,
         headers: getHeaders(),
       };
-
       // make a fetch request
       const requestTimeoutId = setTimeout(
         () => controller.abort(),

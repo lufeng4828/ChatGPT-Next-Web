@@ -154,7 +154,6 @@ export function getHeaders() {
     : isAzure
     ? accessStore.azureApiKey
     : accessStore.openaiApiKey;
-
   const makeBearer = (s: string) => `${isAzure ? "" : "Bearer "}${s.trim()}`;
   const validString = (x: string) => x && x.length > 0;
 

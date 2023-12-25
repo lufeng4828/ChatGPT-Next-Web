@@ -29,7 +29,6 @@ export function auth(req: NextRequest, modelProvider: ModelProvider) {
 
   // check if it is openai api key or user token
   const { accessCode, apiKey } = parseApiKey(authToken);
-
   const hashedCode = md5.hash(accessCode ?? "").trim();
 
   const serverConfig = getServerSideConfig();
@@ -52,11 +51,9 @@ export function auth(req: NextRequest, modelProvider: ModelProvider) {
       msg: "you are not allowed to access with your own api key",
     };
   }
-
   // if user does not provide an api key, inject system api key
   if (!apiKey) {
     const serverConfig = getServerSideConfig();
-
     const systemApiKey =
       modelProvider === ModelProvider.GeminiPro
         ? serverConfig.googleApiKey

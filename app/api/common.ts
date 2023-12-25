@@ -101,7 +101,6 @@ export async function requestOpenai(req: NextRequest) {
       console.error("[OpenAI] gpt4 filter", e);
     }
   }
-
   try {
     const res = await fetch(fetchUrl, fetchOptions);
 

@@ -47,6 +47,21 @@ const ACCESS_CODES = (function getAccessCodes(): Set<string> {
   }
 })();
 
+//support multi key
+function getRandomApiKey(str: string) {
+  if (str === "" || !str.includes(",")) {
+    return str;
+  }
+
+  const array = str.split(",");
+  const randomIndex = Math.floor(Math.random() * array.length);
+  const rndValue = array[randomIndex];
+  console.log(
+    `[Server Config] using ${randomIndex + 1} of ${array.length} api key`,
+  );
+  return rndValue;
+}
+
 export const getServerSideConfig = () => {
   if (typeof process === "undefined") {
     throw Error(
@@ -66,14 +81,9 @@ export const getServerSideConfig = () => {
 
   const isAzure = !!process.env.AZURE_URL;
   const isGoogle = !!process.env.GOOGLE_API_KEY;
-
-  const apiKeyEnvVar = process.env.OPENAI_API_KEY ?? "";
-  const apiKeys = apiKeyEnvVar.split(",").map((v) => v.trim());
-  const randomIndex = Math.floor(Math.random() * apiKeys.length);
-  const apiKey = apiKeys[randomIndex];
-  console.log(
-    `[Server Config] using ${randomIndex + 1} of ${apiKeys.length} api key`,
-  );
+  const apiKey = getRandomApiKey(process.env.OPENAI_API_KEY ?? "");
+  const googleApiKey = getRandomApiKey(process.env.GOOGLE_API_KEY ?? "");
+  const azureApiKey = getRandomApiKey(process.env.AZURE_API_KEY ?? "");
 
   return {
     baseUrl: process.env.BASE_URL,
@@ -82,11 +92,11 @@ export const getServerSideConfig = () => {
 
     isAzure,
     azureUrl: process.env.AZURE_URL,
-    azureApiKey: process.env.AZURE_API_KEY,
+    azureApiKey,
     azureApiVersion: process.env.AZURE_API_VERSION,
 
     isGoogle,
-    googleApiKey: process.env.GOOGLE_API_KEY,
+    googleApiKey,
     googleUrl: process.env.GOOGLE_URL,
 
     needCode: ACCESS_CODES.size > 0,
