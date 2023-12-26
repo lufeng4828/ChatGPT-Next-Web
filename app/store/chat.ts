@@ -18,6 +18,7 @@ import { prettyObject } from "../utils/format";
 import { estimateTokenLength } from "../utils/token";
 import { nanoid } from "nanoid";
 import { createPersistStore } from "../utils/store";
+import { useAccessStore } from "@/app/store";
 
 export type ChatMessage = RequestMessage & {
   date: string;
@@ -270,7 +271,7 @@ export const useChatStore = createPersistStore(
       async onUserInput(content: string) {
         const session = get().currentSession();
         const modelConfig = session.mask.modelConfig;
-
+        const accessStore = useAccessStore.getState();
         const userContent = fillTemplateWith(content, modelConfig);
         console.log("[User Input] after template: ", userContent);
 
@@ -303,12 +304,13 @@ export const useChatStore = createPersistStore(
         });
 
         var api: ClientApi;
-        if (modelConfig.model === "gemini-pro") {
+        const isgeminiWithoutProxy =
+          modelConfig.model === "gemini-pro" && !!!accessStore.baseUrl;
+        if (isgeminiWithoutProxy) {
           api = new ClientApi(ModelProvider.GeminiPro);
         } else {
           api = new ClientApi(ModelProvider.GPT);
         }
-
         // make request
         api.llm.chat({
           messages: sendMessages,
@@ -483,10 +485,12 @@ export const useChatStore = createPersistStore(
       summarizeSession() {
         const config = useAppConfig.getState();
         const session = get().currentSession();
+        const accessStore = useAccessStore.getState();
         const modelConfig = session.mask.modelConfig;
-
+        const isgeminiWithoutProxy =
+          modelConfig.model === "gemini-pro" && !!!accessStore.baseUrl;
         var api: ClientApi;
-        if (modelConfig.model === "gemini-pro") {
+        if (isgeminiWithoutProxy) {
           api = new ClientApi(ModelProvider.GeminiPro);
         } else {
           api = new ClientApi(ModelProvider.GPT);

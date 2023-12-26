@@ -191,9 +191,11 @@ function Screen() {
 
 export function useLoadData() {
   const config = useAppConfig();
-
+  const accessStore = useAccessStore.getState();
   var api: ClientApi;
-  if (config.modelConfig.model === "gemini-pro") {
+  const isgeminiWithoutProxy =
+    config.modelConfig.model === "gemini-pro" && !!!accessStore.baseUrl;
+  if (isgeminiWithoutProxy) {
     api = new ClientApi(ModelProvider.GeminiPro);
   } else {
     api = new ClientApi(ModelProvider.GPT);

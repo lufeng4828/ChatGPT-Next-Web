@@ -77,7 +77,6 @@ async function handle(
     duplex: "half",
     signal: controller.signal,
   };
-
   try {
     const res = await fetch(fetchUrl, fetchOptions);
     // to prevent browser prompt for credentials

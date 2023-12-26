@@ -13,6 +13,7 @@ import {
 } from "./ui-lib";
 import { IconButton } from "./button";
 import { copyToClipboard, downloadAs, useMobileScreen } from "../utils";
+import { useAccessStore } from "../store";
 
 import CopyIcon from "../icons/copy.svg";
 import LoadingIcon from "../icons/three-dots.svg";
@@ -302,16 +303,18 @@ export function PreviewActions(props: {
   const [loading, setLoading] = useState(false);
   const [shouldExport, setShouldExport] = useState(false);
   const config = useAppConfig();
+  const accessStore = useAccessStore.getState();
+
+  const isgeminiWithoutProxy =
+    config.modelConfig.model === "gemini-pro" && !!!accessStore.baseUrl;
   const onRenderMsgs = (msgs: ChatMessage[]) => {
     setShouldExport(false);
-
     var api: ClientApi;
-    if (config.modelConfig.model === "gemini-pro") {
+    if (isgeminiWithoutProxy) {
       api = new ClientApi(ModelProvider.GeminiPro);
     } else {
       api = new ClientApi(ModelProvider.GPT);
     }
-
     api
       .share(msgs)
       .then((res) => {
