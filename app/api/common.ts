@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 import { getServerSideConfig } from "../config/server";
-import { DEFAULT_MODELS, OPENAI_BASE_URL, GEMINI_BASE_URL } from "../constant";
+import { DEFAULT_MODELS, OPENAI_BASE_URL } from "../constant";
 import { collectModelTable } from "../utils/model";
 import { makeAzurePath } from "../azure";
 
@@ -9,10 +9,21 @@ const serverConfig = getServerSideConfig();
 export async function requestOpenai(req: NextRequest) {
   const controller = new AbortController();
 
-  const authValue =
-    req.headers.get("Authorization")?.trim().replaceAll("Bearer ", "").trim() ??
-    "";
-  const authHeaderName = serverConfig.isAzure ? "api-key" : "Authorization";
+  var authValue,
+    authHeaderName = "";
+  if (serverConfig.isAzure) {
+    authValue =
+      req.headers
+        .get("Authorization")
+        ?.trim()
+        .replaceAll("Bearer ", "")
+        .trim() ?? "";
+
+    authHeaderName = "api-key";
+  } else {
+    authValue = req.headers.get("Authorization") ?? "";
+    authHeaderName = "Authorization";
+  }
 
   let path = `${req.nextUrl.pathname}${req.nextUrl.search}`.replaceAll(
     "/api/openai/",
@@ -54,6 +65,11 @@ export async function requestOpenai(req: NextRequest) {
     path = makeAzurePath(path, serverConfig.azureApiVersion);
   }
 
+  const clonedBody = await req.text();
+  const jsonBody = JSON.parse(clonedBody) as { model?: string };
+  if (serverConfig.isAzure) {
+    baseUrl = `${baseUrl}/${jsonBody.model}`;
+  }
   const fetchUrl = `${baseUrl}/${path}`;
   const fetchOptions: RequestInit = {
     headers: {
@@ -65,24 +81,24 @@ export async function requestOpenai(req: NextRequest) {
       }),
     },
     method: req.method,
-    body: req.body,
+    body: clonedBody,
     // to fix #2485: https://stackoverflow.com/questions/55920957/cloudflare-worker-typeerror-one-time-use-body
     redirect: "manual",
     // @ts-ignore
     duplex: "half",
     signal: controller.signal,
   };
+
   // #1815 try to refuse gpt4 request
-  if (serverConfig.customModels && req.body) {
+  if (serverConfig.customModels && clonedBody) {
     try {
       const modelTable = collectModelTable(
         DEFAULT_MODELS,
         serverConfig.customModels,
       );
-      const clonedBody = await req.text();
+      // const clonedBody = await req.text();
+      // const jsonBody = JSON.parse(clonedBody) as { model?: string };
       fetchOptions.body = clonedBody;
-
-      const jsonBody = JSON.parse(clonedBody) as { model?: string };
 
       // not undefined and is false
       if (modelTable[jsonBody?.model ?? ""].available === false) {
@@ -100,6 +116,7 @@ export async function requestOpenai(req: NextRequest) {
       console.error("[OpenAI] gpt4 filter", e);
     }
   }
+
   try {
     const res = await fetch(fetchUrl, fetchOptions);
 
@@ -108,6 +125,12 @@ export async function requestOpenai(req: NextRequest) {
     newHeaders.delete("www-authenticate");
     // to disable nginx buffering
     newHeaders.set("X-Accel-Buffering", "no");
+
+    // The latest version of the OpenAI API forced the content-encoding to be "br" in json response
+    // So if the streaming is disabled, we need to remove the content-encoding header
+    // Because Vercel uses gzip to compress the response, if we don't remove the content-encoding header
+    // The browser will try to decode the response with brotli and fail
+    newHeaders.delete("content-encoding");
 
     return new Response(res.body, {
       status: res.status,

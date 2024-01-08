@@ -133,7 +133,7 @@ export function SidebarNav() {
           }
           text={isMobileScreen ? undefined : Locale.Plugin.Name}
           className={styles["sidebar-bar-button"]}
-          onClick={() => showToast(Locale.WIP)}
+          onClick={() => navigate(Path.Plugins, { state: { fromHome: true } })}
           shadow
         />
         {!isMobileScreen && (

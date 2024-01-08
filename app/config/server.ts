@@ -52,7 +52,6 @@ function getRandomApiKey(str: string) {
   if (str === "" || !str.includes(",")) {
     return str;
   }
-
   const array = str.split(",");
   const randomIndex = Math.floor(Math.random() * array.length);
   const rndValue = array[randomIndex];
@@ -84,7 +83,6 @@ export const getServerSideConfig = () => {
   const apiKey = getRandomApiKey(process.env.OPENAI_API_KEY ?? "");
   const googleApiKey = getRandomApiKey(process.env.GOOGLE_API_KEY ?? "");
   const azureApiKey = getRandomApiKey(process.env.AZURE_API_KEY ?? "");
-
   return {
     baseUrl: process.env.BASE_URL,
     apiKey,
@@ -97,7 +95,7 @@ export const getServerSideConfig = () => {
 
     isGoogle,
     googleApiKey,
-    googleUrl: process.env.GOOGLE_URL,
+    googleBaseUrl: process.env.GOOGLE_BASE_URL,
 
     needCode: ACCESS_CODES.size > 0,
     code: process.env.CODE,
@@ -111,5 +109,6 @@ export const getServerSideConfig = () => {
     hideBalanceQuery: !process.env.ENABLE_BALANCE_QUERY,
     disableFastLink: !!process.env.DISABLE_FAST_LINK,
     customModels,
+    isStoreFileToLocal: true,
   };
 };
