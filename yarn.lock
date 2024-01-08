@@ -1476,6 +1476,11 @@
     "@types/react" "*"
     "hoist-non-react-statics" "^3.3.0"
 
+"@types/html-to-text@^9.0.4":
+  "integrity" "sha512-pUY3cKH/Nm2yYrEmDlPR1mR7yszjGx4DrwPjQ702C4/D5CwHuZTgZdIdwPkRbcuhs7BAh2L5rg3CL5cbRiGTCQ=="
+  "resolved" "https://mirrors.tencent.com/npm/@types/html-to-text/-/html-to-text-9.0.4.tgz"
+  "version" "9.0.4"
+
 "@types/json-schema@*", "@types/json-schema@^7.0.8":
   "integrity" "sha512-Hr5Jfhc9eYOQNPYO5WLDq/n4jqijdHNlDXjuAQkkt+mWdQR+XJToOHrsD4cPaMXpn6KO7y2+wM8AZEs8VpBLVA=="
   "resolved" "https://registry.npmmirror.com/@types/json-schema/-/json-schema-7.0.12.tgz"
