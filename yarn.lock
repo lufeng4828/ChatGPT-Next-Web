@@ -1660,6 +1660,11 @@
   "resolved" "https://registry.npmmirror.com/@vercel/analytics/-/analytics-0.1.11.tgz"
   "version" "0.1.11"
 
+"@vercel/speed-insights@^1.0.2":
+  "integrity" "sha512-y5HWeB6RmlyVYxJAMrjiDEz8qAIy2cit0fhBq+MD78WaUwQvuBnQlX4+5MuwVTWi46bV3klaRMq83u9zUy1KOg=="
+  "resolved" "https://mirrors.tencent.com/npm/@vercel/speed-insights/-/speed-insights-1.0.2.tgz"
+  "version" "1.0.2"
+
 "@webassemblyjs/ast@^1.11.5", "@webassemblyjs/ast@1.11.6":
   "integrity" "sha512-IN1xI7PwOvLPgjcf180gC1bqn3q/QaOCwYUahIOhbYUu8KA/3tw2RT/T0Gidi1l7Hhj5D/INhJxiICObqpMu4Q=="
   "resolved" "https://registry.npmmirror.com/@webassemblyjs/ast/-/ast-1.11.6.tgz"

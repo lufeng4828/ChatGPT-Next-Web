@@ -597,9 +597,16 @@ export function ChatActions(props: {
       <ChatAction
         onClick={() => setShowModelSelector(true)}
         text={currentModel}
-        isFull={true}
         icon={
-          <i className="iconfont icon-ChatGPT" style={{ fontSize: "14px" }}></i>
+          <i
+            className="iconfont icon-ChatGPT"
+            style={{
+              fontSize: "14px",
+              color: getComputedStyle(
+                document.documentElement,
+              ).getPropertyValue("--primary-color"),
+            }}
+          ></i>
         }
       />
 
