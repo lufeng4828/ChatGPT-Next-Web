@@ -219,7 +219,7 @@ export class AgentApi {
       let searchTool: Tool = new DuckDuckGo();
       const tools = [];
       if (useTools.includes("web-search")) tools.push(searchTool);
-      console.log(customTools);
+      //console.log(customTools);
 
       customTools.forEach((customTool) => {
         if (customTool) {

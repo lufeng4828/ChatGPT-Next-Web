@@ -160,7 +160,7 @@ export const MOMENT_LANG_MAPPING = {
   no: "nn",
   ar: "ar",
   bn: "bn",
-};
+} as any;
 
 export function timeAgo(timeStr: string) {
   moment.locale(MOMENT_LANG_MAPPING[getLang()]);
