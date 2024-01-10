@@ -1,9 +1,13 @@
 import { NextRequest, NextResponse } from "next/server";
-import { AgentApi, RequestBody, ResponseBody } from "@/app/api/agentapi";
+import {
+  AgentApi,
+  RequestBody,
+  ResponseBody,
+} from "@/app/api/langchain/agentapi";
 import { auth } from "@/app/api/auth";
 import { EdgeTool } from "@/app/api/langchain-tools/edge_tools";
-import { OpenAI } from "langchain/llms/openai";
-import { OpenAIEmbeddings } from "langchain/embeddings/openai";
+import { OpenAI } from "@langchain/openai";
+import { OpenAIEmbeddings } from "@langchain/openai";
 import { ModelProvider } from "@/app/constant";
 
 async function handle(req: NextRequest) {

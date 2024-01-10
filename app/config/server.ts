@@ -109,6 +109,6 @@ export const getServerSideConfig = () => {
     hideBalanceQuery: !process.env.ENABLE_BALANCE_QUERY,
     disableFastLink: !!process.env.DISABLE_FAST_LINK,
     customModels,
-    isStoreFileToLocal: true,
+    isStoreFileToLocal: !!process.env.NEXT_PUBLIC_ENABLE_NODEJS_PLUGIN,
   };
 };

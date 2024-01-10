@@ -10,9 +10,8 @@ import { AgentExecutor } from "langchain/agents";
 import { ACCESS_CODE_PREFIX } from "@/app/constant";
 
 import * as langchainTools from "langchain/tools";
-import { DuckDuckGo } from "./langchain-tools/duckduckgo_search";
-import { DynamicTool, Tool } from "langchain/tools";
-import { formatToOpenAITool } from "langchain/tools";
+import { DuckDuckGo } from "@/app/api/langchain-tools/duckduckgo_search";
+import { formatToOpenAITool, Tool } from "langchain/tools";
 import { formatToOpenAIToolMessages } from "langchain/agents/format_scratchpad/openai_tools";
 import {
   OpenAIToolsAgentOutputParser,
@@ -122,7 +121,7 @@ export class AgentApi {
       },
       async handleAgentAction(action) {
         try {
-          //console.log("[handleAgentAction]", { action });
+          // console.log("[handleAgentAction]", { action });
           if (!reqBody.returnIntermediateSteps) return;
           var response = new ResponseBody();
           response.isToolMessage = true;
@@ -218,8 +217,9 @@ export class AgentApi {
 
       let searchTool: Tool = new DuckDuckGo();
       const tools = [];
+
       if (useTools.includes("web-search")) tools.push(searchTool);
-      //console.log(customTools);
+      // console.log(customTools);
 
       customTools.forEach((customTool) => {
         if (customTool) {
@@ -252,6 +252,14 @@ export class AgentApi {
           if (message.role === "assistant")
             pastMessages.push(new AIMessage(message.content));
         });
+
+      // const memory = new BufferMemory({
+      //   memoryKey: "chat_history",
+      //   returnMessages: true,
+      //   inputKey: "input",
+      //   outputKey: "output",
+      //   chatHistory: new ChatMessageHistory(pastMessages),
+      // });
 
       let llm = new ChatOpenAI(
         {
@@ -316,6 +324,13 @@ export class AgentApi {
         agent: runnableAgent,
         tools,
       });
+
+      // const executor = await initializeAgentExecutorWithOptions(tools, llm, {
+      //   agentType: "openai-functions",
+      //   returnIntermediateSteps: reqBody.returnIntermediateSteps,
+      //   maxIterations: reqBody.maxIterations,
+      //   memory: memory,
+      // });
 
       executor.call(
         {
