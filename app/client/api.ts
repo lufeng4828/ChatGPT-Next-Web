@@ -27,6 +27,7 @@ export interface LLMConfig {
   temperature?: number;
   top_p?: number;
   stream?: boolean;
+  searchEngine?: string;
   presence_penalty?: number;
   frequency_penalty?: number;
 }
@@ -40,7 +41,11 @@ export interface LLMAgentConfig {
 export interface ChatOptions {
   messages: RequestMessage[];
   config: LLMConfig;
-  onToolUpdate?: (toolName: string, toolInput: string) => void;
+  onToolUpdate?: (
+    toolName: string,
+    toolInput: string,
+    selectToolNames: string[],
+  ) => void;
   onUpdate?: (message: string, chunk: string) => void;
   onFinish: (message: string) => void;
   onError?: (err: Error) => void;
@@ -51,7 +56,11 @@ export interface AgentChatOptions {
   messages: RequestMessage[];
   config: LLMConfig;
   agentConfig: LLMAgentConfig;
-  onToolUpdate?: (toolName: string, toolInput: string) => void;
+  onToolUpdate?: (
+    toolName: string,
+    toolInput: string,
+    selectToolNames: string[],
+  ) => void;
   onUpdate?: (message: string, chunk: string) => void;
   onFinish: (message: string) => void;
   onError?: (err: Error) => void;

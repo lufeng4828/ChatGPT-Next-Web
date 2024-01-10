@@ -11,6 +11,9 @@ import { ACCESS_CODE_PREFIX } from "@/app/constant";
 
 import * as langchainTools from "langchain/tools";
 import { DuckDuckGo } from "@/app/api/langchain-tools/duckduckgo_search";
+import { BaiduSearch } from "@/app/api/langchain-tools/baidu_search";
+import { GoogleSearch } from "@/app/api/langchain-tools/google_search";
+
 import { formatToOpenAITool, Tool } from "langchain/tools";
 import { formatToOpenAIToolMessages } from "langchain/agents/format_scratchpad/openai_tools";
 import {
@@ -40,6 +43,7 @@ export interface RequestBody {
   maxIterations: number;
   returnIntermediateSteps: boolean;
   useTools: (undefined | string)[];
+  searchEngine: undefined | string;
 }
 
 export class ResponseBody {
@@ -47,6 +51,7 @@ export class ResponseBody {
   message!: string;
   isToolMessage: boolean = false;
   toolName?: string;
+  selectToolNames?: string[];
 }
 
 export interface ToolInput {
@@ -127,6 +132,12 @@ export class AgentApi {
           response.isToolMessage = true;
           response.message = Object.values(action.toolInput).join(" ");
           response.toolName = action.tool;
+          response.selectToolNames = [
+            "baidu_search",
+            "google_search",
+            "duckduckgo_search",
+          ];
+
           await writer.ready;
           await writer.write(
             encoder.encode(`data: ${JSON.stringify(response)}\n\n`),
@@ -191,6 +202,7 @@ export class AgentApi {
 
       // const reqBody: RequestBody = await req.json();
       const isAzure = reqBody.isAzure || serverConfig.isAzure;
+      const searchEngine = reqBody.searchEngine;
       const authHeaderName = isAzure ? "api-key" : "Authorization";
       const authToken = req.headers.get(authHeaderName) ?? "";
       const token = authToken.trim().replaceAll("Bearer ", "").trim();
@@ -217,6 +229,12 @@ export class AgentApi {
 
       let searchTool: Tool = new DuckDuckGo();
       const tools = [];
+
+      if (searchEngine == "google_search") {
+        searchTool = new GoogleSearch();
+      } else if (searchEngine == "baidu_search") {
+        searchTool = new BaiduSearch();
+      }
 
       if (useTools.includes("web-search")) tools.push(searchTool);
       // console.log(customTools);

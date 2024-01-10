@@ -7,6 +7,9 @@ import ConfirmIcon from "../icons/confirm.svg";
 import CancelIcon from "../icons/cancel.svg";
 import CloseIcon from "../icons/close.svg";
 import EnablePluginIcon from "../icons/plugin_enable.svg";
+import BaiduIcon from "../icons/baidu.svg";
+import GoogleIcon from "../icons/google.svg";
+import DuckIcon from "../icons/duck.svg";
 import DisablePluginIcon from "../icons/plugin_disable.svg";
 import CheckmarkIcon from "../icons/checkmark.svg";
 import SelectPicIcon from "../icons/select-pic.svg";
@@ -44,6 +47,8 @@ import {
   List,
   ListItem,
   Modal,
+  ToolSelector,
+  Dropdown,
   Selector,
   showConfirm,
   showPrompt,
@@ -450,12 +455,17 @@ export function ChatActions(props: {
 
   // switch model
   const currentModel = chatStore.currentSession().mask.modelConfig.model;
+  const currentSearchEngine =
+    chatStore.currentSession().mask.modelConfig.searchEngine;
   const allModels = useAllModels();
   const models = useMemo(
     () => allModels.filter((m) => m.available),
     [allModels],
   );
+  const searchEngines = ["baidu_search", "google_search", "duckduckgo_search"];
   const [showModelSelector, setShowModelSelector] = useState(false);
+  const [showSearchEngineSelector, setShowSearchEngineSelector] =
+    useState(false);
 
   useEffect(() => {
     // if current model is not available
@@ -578,6 +588,38 @@ export function ChatActions(props: {
             icon={usePlugins ? <EnablePluginIcon /> : <DisablePluginIcon />}
           />
         )}
+      {usePlugins && (
+        <ChatAction
+          onClick={() => setShowSearchEngineSelector(true)}
+          text={currentSearchEngine}
+          icon={
+            currentSearchEngine == "baidu_search" ? (
+              <BaiduIcon />
+            ) : currentSearchEngine == "google_search" ? (
+              <GoogleIcon />
+            ) : (
+              <DuckIcon />
+            )
+          }
+        />
+      )}
+      {showSearchEngineSelector && (
+        <Selector
+          defaultSelectedValue={currentSearchEngine}
+          items={searchEngines.map((m) => ({
+            title: m,
+            value: m,
+          }))}
+          onClose={() => setShowSearchEngineSelector(false)}
+          onSelection={(s) => {
+            if (s.length === 0) return;
+            chatStore.updateCurrentSession((session) => {
+              session.mask.modelConfig.searchEngine = s[0] as ModelType;
+            });
+            showToast(s[0]);
+          }}
+        />
+      )}
       {currentModel == "gpt-4-vision-preview" && (
         <ChatAction
           onClick={selectImage}

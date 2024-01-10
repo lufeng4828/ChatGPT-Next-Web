@@ -281,6 +281,54 @@ export function PasswordInput(props: HTMLProps<HTMLInputElement>) {
   );
 }
 
+export function Dropdown(
+  props: React.DetailedHTMLProps<
+    React.SelectHTMLAttributes<HTMLSelectElement>,
+    HTMLSelectElement
+  >,
+) {
+  const { className, children, ...otherProps } = props;
+  return (
+    <div className={`${styles["dropdown-with-icon"]} ${className}`}>
+      <select className={styles["dropdown-with-icon-select"]} {...otherProps}>
+        {children}
+      </select>
+    </div>
+  );
+}
+
+export function ToolSelector(
+  props: {
+    tool: {
+      toolName: string;
+      toolInput?: string;
+      selectToolNames?: string[];
+    };
+  } & React.DetailedHTMLProps<
+    React.SelectHTMLAttributes<HTMLSelectElement>,
+    HTMLSelectElement
+  >,
+) {
+  // Initialize the state for the selected tool name
+  const [toolName, setToolName] = useState(props.tool.toolName);
+  // Handle the change event
+  const handleChange = (e: {
+    target: { value: React.SetStateAction<string> };
+  }) => {
+    setToolName(e.target.value);
+  };
+
+  return (
+    <Dropdown value={toolName} onChange={handleChange}>
+      {props.tool.selectToolNames?.map((name) => (
+        <option value={name} key={name}>
+          {name}
+        </option>
+      ))}
+    </Dropdown>
+  );
+}
+
 export function Select(
   props: React.DetailedHTMLProps<
     React.SelectHTMLAttributes<HTMLSelectElement>,

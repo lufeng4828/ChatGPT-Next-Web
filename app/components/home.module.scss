@@ -367,6 +367,7 @@
   color: #76787b;
   font-size: 12px;
   margin-top: 8px;
+  gap: 10px;
   animation: slide-in ease 0.3s;
 }
 
@@ -377,14 +378,13 @@
   white-space: nowrap;
 }
 
-.chat-item-count {
-  width: calc(65% - 10px);
-}
-
 .chat-item-date {
   text-align: right;
   padding-right: 5px;
-  width: 35%;
+  word-break: keep-all;
+  min-width: 40px;
+    max-width: 80px;
+    box-sizing: border-box;
 }
 
 .narrow-sidebar {

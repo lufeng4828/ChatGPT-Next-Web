@@ -97,7 +97,7 @@ export function ChatItem(props: {
                   <div className={styles["chat-item-info"]}>
                     <div className={styles["chat-item-count"]}>
                       {props.lastMessage
-                        ? props.lastMessage.slice(0, 20)
+                        ? props.lastMessage.slice(0, 30)
                         : Locale.ChatItem.ChatItemCount(props.count)}
                     </div>
                     <div className={styles["chat-item-date"]}>

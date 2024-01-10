@@ -393,6 +393,9 @@
 
 .chat-message-tools-name {
   color: var(--dark-gray);
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .chat-message-tools-details {

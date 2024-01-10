@@ -24,6 +24,7 @@ import { usePluginStore } from "../store/plugin";
 export interface ChatToolMessage {
   toolName: string;
   toolInput?: string;
+  selectToolNames?: string[];
 }
 
 export type ChatMessage = RequestMessage & {
@@ -279,6 +280,7 @@ export const useChatStore = createPersistStore(
       async onUserInput(content: string, image_url?: string) {
         const session = get().currentSession();
         const modelConfig = session.mask.modelConfig;
+        const searchEngine = modelConfig.searchEngine;
         const accessStore = useAccessStore.getState();
         const userContent = fillTemplateWith(content, modelConfig);
         console.log("[User Input] after template: ", userContent);
@@ -339,7 +341,7 @@ export const useChatStore = createPersistStore(
           const pluginToolNames = allPlugins.map((m) => m.toolName);
           api.llm.toolAgentChat({
             messages: sendMessages,
-            config: { ...modelConfig, stream: true },
+            config: { ...modelConfig, stream: true, searchEngine },
             agentConfig: { ...pluginConfig, useTools: pluginToolNames },
             onUpdate(message) {
               botMessage.streaming = true;
@@ -350,12 +352,13 @@ export const useChatStore = createPersistStore(
                 session.messages = session.messages.concat();
               });
             },
-            onToolUpdate(toolName, toolInput) {
+            onToolUpdate(toolName, toolInput, selectToolNames) {
               botMessage.streaming = true;
               if (toolName && toolInput) {
                 botMessage.toolMessages!.push({
                   toolName,
                   toolInput,
+                  selectToolNames,
                 });
               }
               get().updateCurrentSession((session) => {

@@ -309,6 +309,7 @@ export class ChatGPTApi implements LLMApi {
       isAzure,
       azureApiVersion: accessStore.azureApiVersion,
       stream: options.config.stream,
+      searchEngine: options.config.searchEngine,
       model: modelConfig.model,
       temperature: modelConfig.temperature,
       presence_penalty: modelConfig.presence_penalty,
@@ -415,7 +416,11 @@ export class ChatGPTApi implements LLMApi {
                 responseText += response.message;
                 options.onUpdate?.(responseText, response.message);
               } else {
-                options.onToolUpdate?.(response.toolName!, response.message);
+                options.onToolUpdate?.(
+                  response.toolName!,
+                  response.message,
+                  response.selectToolNames,
+                );
               }
             } catch (e) {
               console.error("[Request] parse error", response, msg);
